@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import Loading from "../../../Loading";
 import ClassChoicesForm from "./ClassChoicesForm";
 
 export default function ClassStep({ defaultValue, dispatch }) {
   const { data, isLoading, isError } = useQuery("classes");
-  const { handleSubmit, register, watch, reset } = useForm({
+  const methods = useForm({
     defaultValues: {
       class: defaultValue.class || "",
       hitDie: defaultValue.hitDie || "",
@@ -15,6 +15,7 @@ export default function ClassStep({ defaultValue, dispatch }) {
       savingThrows: defaultValue.savingThrows || []
     }
   });
+  const { handleSubmit, register, watch } = methods;
   const currentClass = watch("class");
 
   function onSubmit(data) {
@@ -37,28 +38,29 @@ export default function ClassStep({ defaultValue, dispatch }) {
 
   return (
     <section>
-      <h1>Choose a Class</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor={"class"}>Class: </label>
-        <select {...register("class")} id={"class"}>
-          <option value={""} disabled>
-            Please select a class
-          </option>
-          {data.results.map((klass) => (
-            <option key={klass.index} value={klass.index}>
-              {klass.name}
+      <h1>Choose your Class</h1>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor={"class"}>Class: </label>
+          <select
+            {...register("class", { required: "This field is required" })}
+            id={"class"}
+          >
+            <option value={""} disabled>
+              Please select a class
             </option>
-          ))}
-        </select>
-        {currentClass && currentClass !== "" ? (
-          <ClassChoicesForm
-            classIndex={currentClass}
-            register={register}
-            reset={reset}
-          />
-        ) : null}
-        <input type="submit" />
-      </form>
+            {data.results.map((klass) => (
+              <option key={klass.index} value={klass.index}>
+                {klass.name}
+              </option>
+            ))}
+          </select>
+          {currentClass && currentClass !== "" ? (
+            <ClassChoicesForm classIndex={currentClass} />
+          ) : null}
+          <input type={"submit"} value={"Next"} />
+        </form>
+      </FormProvider>
     </section>
   );
 }

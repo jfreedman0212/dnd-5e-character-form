@@ -1,11 +1,16 @@
+import { useFormContext } from "react-hook-form";
 import FieldSet from "../../../FieldSet";
-import OptionCheckboxField from "./OptionCheckboxField";
+import OptionCheckboxField from "../../../OptionCheckboxField";
 
 export default function ProficienciesSection({
   proficiencies,
-  proficiencyChoices,
-  register
+  proficiencyChoices
 }) {
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext();
+
   return (
     <FieldSet>
       <legend>Proficiencies</legend>
@@ -33,6 +38,9 @@ export default function ProficienciesSection({
               })}
             />
           ))}
+          {errors?.proficiencyOptions?.[index]?.message ? (
+            <p>{errors.proficiencyOptions[index].message}</p>
+          ) : null}
         </FieldSet>
       ))}
     </FieldSet>

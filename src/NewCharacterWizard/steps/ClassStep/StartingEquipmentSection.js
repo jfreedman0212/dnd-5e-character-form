@@ -1,5 +1,5 @@
 import FieldSet from "../../../FieldSet";
-import OptionCheckboxField from "./OptionCheckboxField";
+import OptionCheckboxField from "../../../OptionCheckboxField";
 
 export default function StartingEquipmentSection({
   startingEquipment,

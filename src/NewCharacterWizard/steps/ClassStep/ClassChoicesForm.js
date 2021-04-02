@@ -1,15 +1,17 @@
 import { useQuery } from "react-query";
+import { useFormContext } from "react-hook-form";
 import Loading from "../../../Loading";
 import FieldSet from "../../../FieldSet";
 import ProficienciesSection from "./ProficienciesSection";
-import OptionCheckboxField from "./OptionCheckboxField";
+import OptionCheckboxField from "../../../OptionCheckboxField";
 // import StartingEquipmentSection from "./StartingEquipmentSection";
 
 // TODO:
 //  1. make StartingEquipmentSection work properly (need to check all possible data types)
 //  2. style this form to not look ugly please
 
-export default function ClassChoicesForm({ classIndex, register, reset }) {
+export default function ClassChoicesForm({ classIndex }) {
+  const { register, reset } = useFormContext();
   const { data, status } = useQuery({
     queryKey: ["classes", classIndex],
     onSuccess: (successfulData) => {
@@ -21,13 +23,11 @@ export default function ClassChoicesForm({ classIndex, register, reset }) {
         proficiencyOptions: [],
         savingThrows: saving_throws.map((savingThrow) => savingThrow.index)
       });
-      // setValue(
-      //   "equipment",
-      //   data.starting_equipment.map(({ equipment }) => equipment.index)
-      // );
     },
-    // only refetch when classIndex changes
-    refetchOnMount: false
+    // only refetch when classIndex changes and NEVER at another time
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
   });
 
   if (status === "loading") {
@@ -65,7 +65,6 @@ export default function ClassChoicesForm({ classIndex, register, reset }) {
       <ProficienciesSection
         proficiencies={data.proficiencies}
         proficiencyChoices={data.proficiency_choices}
-        register={register}
       />
       {/* <StartingEquipmentSection
           startingEquipment={data.starting_equipment}
