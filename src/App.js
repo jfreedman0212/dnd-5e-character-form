@@ -1,10 +1,12 @@
 import NewCharacterWizard from "./NewCharacterWizard/NewCharacterWizard";
-import ErrorBoundary from "./ErrorBoundary";
+import ErrorBoundary from "./utils/ErrorBoundary";
 
 export default function App() {
-  return (
-    <ErrorBoundary>
-      <NewCharacterWizard />
-    </ErrorBoundary>
-  );
+    return (
+        <main>
+            <ErrorBoundary>
+                <NewCharacterWizard />
+            </ErrorBoundary>
+        </main>
+    );
 }
