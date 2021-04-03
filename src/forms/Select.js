@@ -4,7 +4,7 @@ import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
 
-const InputElement = styled.input`
+const SelectElement = styled.select`
     border: none;
     border-radius: 0;
     background-color: #e8e8e8;
@@ -15,20 +15,24 @@ const InputElement = styled.input`
     }
 `;
 
-const Input = forwardRef(
-    ({ label, name, onChange, onBlur, errorMessage, ...rest }, ref) => {
+const Select = forwardRef(
+    (
+        { label, name, onChange, onBlur, errorMessage, children, ...rest },
+        ref
+    ) => {
         return (
             <FormGroup>
                 <Label htmlFor={name}>{label}</Label>
-                <InputElement
-                    type={"text"}
+                <SelectElement
                     id={name}
                     name={name}
                     onChange={onChange}
                     onBlur={onBlur}
                     ref={ref}
                     {...rest}
-                />
+                >
+                    {children}
+                </SelectElement>
                 {errorMessage ? (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 ) : null}
@@ -37,4 +41,4 @@ const Input = forwardRef(
     }
 );
 
-export default Input;
+export default Select;
