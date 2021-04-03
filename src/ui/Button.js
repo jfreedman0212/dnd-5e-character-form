@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-    border: 1px solid ${(props) => props.theme.primary};
+    border: 2px solid ${(props) => props.theme.colors.primary};
     border-radius: 0;
-    color: ${(props) => props.theme.primary};
-    background-color: white;
+    color: ${(props) => props.theme.colors.primary};
+    background-color: transparent;
     padding: 0.5rem 1rem;
     font-weight: bold;
 
     &:hover {
-        background-color: ${(props) => props.theme.secondary};
+        background-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.light};
     }
 `;
 
