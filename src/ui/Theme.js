@@ -26,7 +26,7 @@ const theme = {
 
 // TODO: use local storage and some global switch to change between dark/light mode
 
-const isDark = true;
+const isDark = false;
 
 let newTheme = theme;
 

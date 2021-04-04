@@ -15,7 +15,6 @@ const Input = forwardRef(
             <FormGroup>
                 <Label htmlFor={name}>{label}</Label>
                 <InputElement
-                    type={"text"}
                     id={name}
                     name={name}
                     onChange={onChange}

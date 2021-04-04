@@ -15,7 +15,11 @@ export function wizardReducer(state, action) {
         case "ABILITY_SCORE_STEP":
             return {
                 ...state,
-                currentStep: "RACE"
+                currentStep: "RACE",
+                formData: {
+                    ...state.formData,
+                    ...action.payload
+                }
             };
         case "RACE_STEP":
             return {
