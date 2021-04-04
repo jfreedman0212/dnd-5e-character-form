@@ -15,7 +15,7 @@ import SectionHeading from "../../../ui/SectionHeading";
 export default function ClassChoicesForm({ classIndex }) {
     const { register, reset } = useFormContext();
     const { data, status } = useQuery({
-        queryKey: ["classes", classIndex],
+        queryKey: ["api", "classes", classIndex],
         onSuccess: (successfulData) => {
             const { hit_die, proficiencies, saving_throws } = successfulData;
             reset({
@@ -37,11 +37,7 @@ export default function ClassChoicesForm({ classIndex }) {
     });
 
     if (status === "loading") {
-        return (
-            <section>
-                <Loading />
-            </section>
-        );
+        return <Loading />;
     } else if (status === "error") {
         throw new Error(
             `Could not load ${classIndex}! This is most likely an issue with the D&D API.`

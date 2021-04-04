@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+import Select from "../../../forms/Select";
 import Button from "../../../ui/Button";
 import ButtonGroup from "../../../ui/ButtonGroup";
 import PageHeading from "../../../ui/PageHeading";
@@ -8,13 +9,18 @@ import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
 
 export default function RaceStep({ defaultValue, dispatch }) {
-    const { data, isLoading, isError } = useQuery("races");
+    const { data, isLoading, isError } = useQuery(["api", "races"]);
     const methods = useForm({
         defaultValues: {
             race: defaultValue.race || ""
         }
     });
-    const { register, handleSubmit, watch } = methods;
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }
+    } = methods;
     const currentRace = watch("race");
 
     function goBack() {
@@ -44,12 +50,12 @@ export default function RaceStep({ defaultValue, dispatch }) {
             <FormProvider {...methods}>
                 <StepForm onSubmit={handleSubmit(submitForm)}>
                     <PageHeading>Choose your Race</PageHeading>
-                    <label htmlFor={"race"}>Race: </label>
-                    <select
+                    <Select
                         {...register("race", {
                             required: "This field is required"
                         })}
-                        id={"race"}
+                        label={"Race"}
+                        errorMessage={errors?.race?.message}
                     >
                         <option value={""} disabled>
                             Please select a race
@@ -59,7 +65,7 @@ export default function RaceStep({ defaultValue, dispatch }) {
                                 {race.name}
                             </option>
                         ))}
-                    </select>
+                    </Select>
                     {currentRace && currentRace !== "" ? (
                         <RaceChoicesForm raceIndex={currentRace} />
                     ) : null}

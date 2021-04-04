@@ -9,7 +9,7 @@ import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
 
 export default function ClassStep({ defaultValue, dispatch }) {
-    const { data, isLoading, isError } = useQuery("classes");
+    const { data, isLoading, isError } = useQuery(["api", "classes"]);
     const methods = useForm({
         defaultValues: {
             class: defaultValue.class || "",

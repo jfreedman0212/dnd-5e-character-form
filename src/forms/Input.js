@@ -3,16 +3,10 @@ import { forwardRef } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
+import { inputCss } from "./input-css";
 
 const InputElement = styled.input`
-    border: none;
-    border-radius: 0;
-    background-color: #e8e8e8;
-    padding: 0.5rem;
-
-    &:focus {
-        outline: 1px solid ${(props) => props.theme.primary};
-    }
+    ${inputCss}
 `;
 
 const Input = forwardRef(

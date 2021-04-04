@@ -5,12 +5,17 @@ export function wizardReducer(state, action) {
         case "CLASS_STEP":
             return {
                 ...state,
-                currentStep: "RACE",
+                currentStep: "ABILITY_SCORE",
                 formData: {
                     ...state.formData,
                     ...action.payload
                 }
                 // TODO: dedupe equipment and proficiencies?
+            };
+        case "ABILITY_SCORE_STEP":
+            return {
+                ...state,
+                currentStep: "RACE"
             };
         case "RACE_STEP":
             return {
@@ -22,10 +27,15 @@ export function wizardReducer(state, action) {
                     throw new Error(
                         "Can't go back while in CLASS step. This is an application issue."
                     );
-                case "RACE":
+                case "ABILITY_SCORE":
                     return {
                         ...state,
                         currentStep: "CLASS"
+                    };
+                case "RACE":
+                    return {
+                        ...state,
+                        currentStep: "ABILITY_SCORE"
                     };
                 default:
                     return state;
