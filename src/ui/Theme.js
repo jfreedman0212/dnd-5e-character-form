@@ -1,6 +1,7 @@
+import { createContext, useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
-const theme = {
+const lightTheme = {
     colors: {
         primary: "#FFA500",
         secondary: "#6c757d",
@@ -24,23 +25,58 @@ const theme = {
     }
 };
 
-// TODO: use local storage and some global switch to change between dark/light mode
+// dark theme is just light theme, but with "light" and "dark" colors switched
+const darkTheme = {
+    ...lightTheme,
+    colors: {
+        ...lightTheme.colors,
+        light: lightTheme.colors.dark,
+        dark: lightTheme.colors.light
+    }
+};
 
-const isDark = false;
+const VisualModeValueContext = createContext(null);
+const VisualModeDispatchContext = createContext(null);
 
-let newTheme = theme;
-
-if (isDark) {
-    newTheme = {
-        ...theme,
-        colors: {
-            ...theme.colors,
-            light: theme.colors.dark,
-            dark: theme.colors.light
-        }
-    };
+export function Theme({ children }) {
+    const [visualMode, setVisualMode] = useState(VisualMode.LIGHT);
+    let currentTheme;
+    switch (visualMode) {
+        case VisualMode.LIGHT:
+            currentTheme = lightTheme;
+            break;
+        case VisualMode.DARK:
+            currentTheme = darkTheme;
+            break;
+        default:
+            throw new Error(`Invalid visual mode ${visualMode}`);
+    }
+    return (
+        <VisualModeDispatchContext.Provider value={setVisualMode}>
+            <VisualModeValueContext.Provider value={visualMode}>
+                <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
+            </VisualModeValueContext.Provider>
+        </VisualModeDispatchContext.Provider>
+    );
 }
 
-export default function Theme({ children }) {
-    return <ThemeProvider theme={newTheme}>{children}</ThemeProvider>;
+export function useVisualModeValue() {
+    const visualMode = useContext(VisualModeValueContext);
+    if (!visualMode) {
+        throw new Error("Must wrap in Theme to use this hook!");
+    }
+    return visualMode;
 }
+
+export function useVisualModeDispatch() {
+    const setVisualMode = useContext(VisualModeDispatchContext);
+    if (!setVisualMode) {
+        throw new Error("Must wrap in Theme to use this hook!");
+    }
+    return setVisualMode;
+}
+
+export const VisualMode = {
+    LIGHT: "light",
+    DARK: "dark"
+};

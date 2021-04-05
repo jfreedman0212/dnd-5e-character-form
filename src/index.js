@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { QueryClientProvider } from "react-query";
-import Theme from "./ui/Theme";
+import { Theme } from "./ui/Theme";
 import { queryClient } from "./api";
 import App from "./App";
 import GlobalStyle from "./ui/GlobalStyle";
