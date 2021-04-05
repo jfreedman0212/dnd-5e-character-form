@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 
 const lightTheme = {
     colors: {
-        primary: "#FFA500",
+        primary: "#A63AE9",
         secondary: "#6c757d",
         success: "#28a745",
         danger: "#dc3545",
@@ -30,6 +30,7 @@ const darkTheme = {
     ...lightTheme,
     colors: {
         ...lightTheme.colors,
+        primary: "#C88CE3",
         light: lightTheme.colors.dark,
         dark: lightTheme.colors.light
     }
