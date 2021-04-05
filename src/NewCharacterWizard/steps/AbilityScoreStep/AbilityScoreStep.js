@@ -7,16 +7,25 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import Input from "../../../forms/Input";
 import styled from "styled-components";
+import Anchor from "../../../ui/Anchor";
+import { useState } from "react";
+import AbilityScoreHelp from "./AbilityScoreHelp";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+
+    @media only screen and (min-width: ${({ theme }) =>
+            theme.breakpoints.medium}) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 `;
 
 export default function AbilityScoreStep({ defaultValue, dispatch }) {
     const { data, status } = useQuery(["api", "ability-scores"]);
+    const [showHelp, setShowHelp] = useState(false);
 
     const {
         register,
@@ -32,6 +41,10 @@ export default function AbilityScoreStep({ defaultValue, dispatch }) {
             wis: defaultValue.wis || ""
         }
     });
+
+    function toggleHelp() {
+        setShowHelp((x) => !x);
+    }
 
     function goBack() {
         dispatch({ type: "GO_BACK" });
@@ -81,7 +94,11 @@ export default function AbilityScoreStep({ defaultValue, dispatch }) {
                             })}
                         />
                     ))}
+                    <div>
+                        <Anchor onClick={toggleHelp}>Need help?</Anchor>
+                    </div>
                 </AbilityScoreContainer>
+                {showHelp ? <AbilityScoreHelp /> : null}
                 <ButtonGroup>
                     <Button onClick={goBack} type={"button"}>
                         Back
