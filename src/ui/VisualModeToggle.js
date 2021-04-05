@@ -21,7 +21,14 @@ export default function VisualModeToggle() {
     }
 
     return (
-        <Button onClick={switchMode}>
+        <Button
+            onClick={switchMode}
+            aria-label={
+                visualMode === VisualMode.LIGHT
+                    ? "Turn on Dark Mode"
+                    : "Turn on Light Mode"
+            }
+        >
             <FontAwesomeIcon
                 icon={visualMode === VisualMode.LIGHT ? faSun : faMoon}
                 fixedWidth
