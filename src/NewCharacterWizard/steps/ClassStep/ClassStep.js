@@ -66,6 +66,8 @@ export default function ClassStep({ defaultValue, dispatch }) {
                         <ClassChoicesForm classIndex={currentClass} />
                     ) : null}
                     <ButtonGroup>
+                        {/* TODO: make this cancel the current character */}
+                        <Button type={"button"}>Cancel</Button>
                         <Button type={"submit"}>Next</Button>
                     </ButtonGroup>
                 </StepForm>

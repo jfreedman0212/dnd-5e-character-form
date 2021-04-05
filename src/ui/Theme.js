@@ -40,7 +40,7 @@ const VisualModeValueContext = createContext(null);
 const VisualModeDispatchContext = createContext(null);
 
 export function Theme({ children }) {
-    const [visualMode, setVisualMode] = useState(VisualMode.LIGHT);
+    const [visualMode, setVisualMode] = useState(VisualMode.DARK);
     let currentTheme;
     switch (visualMode) {
         case VisualMode.LIGHT:
