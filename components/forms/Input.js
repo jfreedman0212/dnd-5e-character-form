@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
-import { inputCss } from "./input-css";
+import { inputCss } from "./inputCss";
 
 const InputElement = styled.input`
     ${inputCss}
