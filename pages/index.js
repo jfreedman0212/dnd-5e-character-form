@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import NewCharacterWizard from "./NewCharacterWizard/NewCharacterWizard";
-import VisualModeToggle from "./ui/VisualModeToggle";
-import ErrorBoundary from "./utils/ErrorBoundary";
+import NewCharacterWizard from "./components/NewCharacterWizard/NewCharacterWizard";
+import VisualModeToggle from "./components/ui/VisualModeToggle";
+import ErrorBoundary from "./components/utils/ErrorBoundary";
 
 const Main = styled.main`
     margin: 0 auto;
@@ -12,7 +12,7 @@ const VisualModeToggleContainer = styled.aside`
     text-align: right;
 `;
 
-export default function App() {
+export default function MainCharacterForm() {
     return (
         <Main>
             <ErrorBoundary>
