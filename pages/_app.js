@@ -1,5 +1,5 @@
 import { Theme } from "../components/ui/Theme";
-import { GlobalStyle } from "../components/ui/GlobalStyle";
+import GlobalStyle from "../components/ui/GlobalStyle";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "../lib/queryClient";
 

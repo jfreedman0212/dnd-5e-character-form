@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import NewCharacterWizard from "./components/NewCharacterWizard/NewCharacterWizard";
-import VisualModeToggle from "./components/ui/VisualModeToggle";
-import ErrorBoundary from "./components/utils/ErrorBoundary";
+import NewCharacterWizard from "../components/NewCharacterWizard/NewCharacterWizard";
+import VisualModeToggle from "../components/ui/VisualModeToggle";
+import ErrorBoundary from "../components/utils/ErrorBoundary";
 
 const Main = styled.main`
     margin: 0 auto;
