@@ -1,45 +1,58 @@
+export const CharacterWizardAction = {
+    COMPLETE_CLASS_STEP = "CLASS_STEP",
+    COMPLETE_ABILITY_SCORE_STEP = "ABILITY_SCORE_STEP",
+    COMPLETE_RACE_STEP = "RACE_STEP",
+    GO_BACK = "GO_BACK"
+};
+
+export const CharacterWizardStep = {
+    CLASS = "CLASS",
+    ABILITY_SCORE = "ABILITY_SCORE",
+    RACE = "RACE"
+};
+
 export function wizardReducer(state, action) {
     console.debug("current state", state);
     console.debug("action", action);
     switch (action.type) {
-        case "CLASS_STEP":
+        case CharacterWizardAction.COMPLETE_CLASS_STEP:
             return {
                 ...state,
-                currentStep: "ABILITY_SCORE",
+                currentStep: CharacterWizardStep.ABILITY_SCORE,
                 formData: {
                     ...state.formData,
                     ...action.payload
                 }
                 // TODO: dedupe equipment and proficiencies?
             };
-        case "ABILITY_SCORE_STEP":
+        case CharacterWizardAction.COMPLETE_ABILITY_SCORE_STEP:
             return {
                 ...state,
-                currentStep: "RACE",
+                currentStep: CharacterWizardStep.RACE,
                 formData: {
                     ...state.formData,
                     ...action.payload
                 }
             };
-        case "RACE_STEP":
+        case CharacterWizardAction.COMPLETE_RACE_STEP:
             return {
                 ...state
             };
-        case "GO_BACK":
+        case CharacterWizardAction.GO_BACK:
             switch (state.currentStep) {
-                case "CLASS":
+                case CharacterWizardStep.CLASS:
                     throw new Error(
                         "Can't go back while in CLASS step. This is an application issue."
                     );
-                case "ABILITY_SCORE":
+                case CharacterWizardStep.ABILITY_SCORE:
                     return {
                         ...state,
-                        currentStep: "CLASS"
+                        currentStep: CharacterWizardStep.CLASS
                     };
-                case "RACE":
+                case CharacterWizardStep.RACE:
                     return {
                         ...state,
-                        currentStep: "ABILITY_SCORE"
+                        currentStep: CharacterWizardStep.ABILITY_SCORE
                     };
                 default:
                     return state;
