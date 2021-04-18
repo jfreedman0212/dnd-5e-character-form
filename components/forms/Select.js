@@ -6,7 +6,16 @@ import FormGroup from "./FormGroup";
 import { inputCss } from "./inputCss";
 
 const SelectElement = styled.select`
-    ${inputCss}
+    ${inputCss};
+
+    & option {
+        background: ${(props) => props.theme.colors.dark};
+        color: ${(props) => props.theme.colors.light};
+    }
+
+    & option:disabled {
+        color: ${(props) => props.theme.colors.secondary};
+    }
 `;
 
 const Select = forwardRef(
