@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import Input from "../../../forms/Input";
 import styled from "styled-components";
+import { CharacterWizardAction } from "../../wizardReducer";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -39,11 +40,14 @@ export default function AbilityScoreStep({ defaultValue, dispatch }) {
     });
 
     function goBack() {
-        dispatch({ type: "GO_BACK" });
+        dispatch({ type: CharacterWizardAction.GO_BACK });
     }
 
     function submitForm(data) {
-        dispatch({ type: "ABILITY_SCORE_STEP", payload: data });
+        dispatch({
+            type: CharacterWizardAction.COMPLETE_ABILITY_SCORE_STEP,
+            payload: data
+        });
     }
 
     if (status === "loading") {

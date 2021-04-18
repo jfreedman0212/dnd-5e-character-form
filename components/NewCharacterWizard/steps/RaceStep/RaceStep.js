@@ -7,6 +7,7 @@ import PageHeading from "../../../ui/PageHeading";
 import Loading from "../../../utils/Loading";
 import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
+import { CharacterWizardAction } from "../../wizardReducer";
 
 export default function RaceStep({ defaultValue, dispatch }) {
     const { data, isLoading, isError } = useQuery(["api", "races"]);
@@ -24,11 +25,11 @@ export default function RaceStep({ defaultValue, dispatch }) {
     const currentRace = watch("race");
 
     function goBack() {
-        dispatch({ type: "GO_BACK" });
+        dispatch({ type: CharacterWizardAction.GO_BACK });
     }
 
     function submitForm(data) {
-        dispatch({ type: "RACE_STEP", payload: data });
+        dispatch({ type: CharacterWizardAction.COMPLETE_RACE_STEP, payload: data });
     }
 
     if (isLoading) {

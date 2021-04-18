@@ -7,6 +7,7 @@ import ButtonGroup from "../../../ui/ButtonGroup";
 import Select from "../../../forms/Select";
 import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
+import { CharacterWizardAction } from "../../wizardReducer";
 
 export default function ClassStep({ defaultValue, dispatch }) {
     const { data, isLoading, isError } = useQuery(["api", "classes"]);
@@ -20,11 +21,16 @@ export default function ClassStep({ defaultValue, dispatch }) {
             savingThrows: defaultValue.savingThrows || []
         }
     });
-    const { handleSubmit, register, watch, formState: {errors} } = methods;
+    const {
+        handleSubmit,
+        register,
+        watch,
+        formState: { errors }
+    } = methods;
     const currentClass = watch("class");
 
     function onSubmit(data) {
-        dispatch({ type: "CLASS_STEP", payload: data });
+        dispatch({ type: CharacterWizardAction.COMPLETE_CLASS_STEP, payload: data });
     }
 
     if (isLoading) {

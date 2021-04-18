@@ -8,7 +8,7 @@ export const CharacterWizardAction = {
 export const CharacterWizardStep = {
     CLASS: "CLASS",
     ABILITY_SCORE: "ABILITY_SCORE",
-    RACE:    "RACE"
+    RACE:  "RACE"
 };
 
 export function wizardReducer(state, action) {
