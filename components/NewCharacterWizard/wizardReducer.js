@@ -1,14 +1,14 @@
 export const CharacterWizardAction = {
-    COMPLETE_CLASS_STEP = "CLASS_STEP",
-    COMPLETE_ABILITY_SCORE_STEP = "ABILITY_SCORE_STEP",
-    COMPLETE_RACE_STEP = "RACE_STEP",
-    GO_BACK = "GO_BACK"
+    COMPLETE_CLASS_STEP: "CLASS_STEP",
+    COMPLETE_ABILITY_SCORE_STEP: "ABILITY_SCORE_STEP",
+    COMPLETE_RACE_STEP: "RACE_STEP",
+    GO_BACK: "GO_BACK"
 };
 
 export const CharacterWizardStep = {
-    CLASS = "CLASS",
-    ABILITY_SCORE = "ABILITY_SCORE",
-    RACE = "RACE"
+    CLASS: "CLASS",
+    ABILITY_SCORE: "ABILITY_SCORE",
+    RACE:    "RACE"
 };
 
 export function wizardReducer(state, action) {
