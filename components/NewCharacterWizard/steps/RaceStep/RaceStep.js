@@ -12,7 +12,14 @@ export default function RaceStep({ formState, goForward }) {
     const { data, isLoading, isError } = useQuery(["api", "races"]);
     const methods = useForm({
         defaultValues: {
-            race: formState.race || ""
+            race: formState.race || "",
+            speed: formState.speed,
+            size: formState.size || "",
+            abilityScoreBonus: formState.abilityScoreBonus || {},
+            age: formState.age,
+            alignment: formState.alignment || "",
+            languages: formState.languages || [],
+            languageOptions: formState.languageOptions || []
         }
     });
     const {
