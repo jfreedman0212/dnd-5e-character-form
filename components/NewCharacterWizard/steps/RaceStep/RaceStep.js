@@ -7,13 +7,12 @@ import PageHeading from "../../../ui/PageHeading";
 import Loading from "../../../utils/Loading";
 import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
-import { CharacterWizardAction } from "../../wizardReducer";
 
-export default function RaceStep({ defaultValue, dispatch }) {
+export default function RaceStep({ formState, goForward }) {
     const { data, isLoading, isError } = useQuery(["api", "races"]);
     const methods = useForm({
         defaultValues: {
-            race: defaultValue.race || ""
+            race: formState.race || ""
         }
     });
     const {
@@ -23,14 +22,6 @@ export default function RaceStep({ defaultValue, dispatch }) {
         formState: { errors }
     } = methods;
     const currentRace = watch("race");
-
-    function goBack() {
-        dispatch({ type: CharacterWizardAction.GO_BACK });
-    }
-
-    function submitForm(data) {
-        dispatch({ type: CharacterWizardAction.COMPLETE_RACE_STEP, payload: data });
-    }
 
     if (isLoading) {
         return (
@@ -49,7 +40,7 @@ export default function RaceStep({ defaultValue, dispatch }) {
     return (
         <section>
             <FormProvider {...methods}>
-                <StepForm onSubmit={handleSubmit(submitForm)}>
+                <StepForm onSubmit={handleSubmit(goForward)}>
                     <PageHeading>Choose your Race</PageHeading>
                     <Select
                         {...register("race", {
@@ -71,9 +62,6 @@ export default function RaceStep({ defaultValue, dispatch }) {
                         <RaceChoicesForm raceIndex={currentRace} />
                     ) : null}
                     <ButtonGroup>
-                        <Button onClick={goBack} type={"button"}>
-                            Back
-                        </Button>
                         <Button type={"submit"}>Next</Button>
                     </ButtonGroup>
                 </StepForm>

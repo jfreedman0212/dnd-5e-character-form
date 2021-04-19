@@ -7,7 +7,6 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import Input from "../../../forms/Input";
 import styled from "styled-components";
-import { CharacterWizardAction } from "../../wizardReducer";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -21,7 +20,7 @@ const AbilityScoreContainer = styled.div`
     }
 `;
 
-export default function AbilityScoreStep({ defaultValue, dispatch }) {
+export default function AbilityScoreStep({ formState, goForward, goBack }) {
     const { data, status } = useQuery(["api", "ability-scores"]);
 
     const {
@@ -30,25 +29,14 @@ export default function AbilityScoreStep({ defaultValue, dispatch }) {
         formState: { errors }
     } = useForm({
         defaultValues: {
-            cha: defaultValue.cha || "",
-            con: defaultValue.con || "",
-            dex: defaultValue.dex || "",
-            int: defaultValue.int || "",
-            str: defaultValue.str || "",
-            wis: defaultValue.wis || ""
+            cha: formState.cha || "",
+            con: formState.con || "",
+            dex: formState.dex || "",
+            int: formState.int || "",
+            str: formState.str || "",
+            wis: formState.wis || ""
         }
     });
-
-    function goBack() {
-        dispatch({ type: CharacterWizardAction.GO_BACK });
-    }
-
-    function submitForm(data) {
-        dispatch({
-            type: CharacterWizardAction.COMPLETE_ABILITY_SCORE_STEP,
-            payload: data
-        });
-    }
 
     if (status === "loading") {
         return (
@@ -68,7 +56,7 @@ export default function AbilityScoreStep({ defaultValue, dispatch }) {
 
     return (
         <section>
-            <StepForm onSubmit={handleSubmit(submitForm)}>
+            <StepForm onSubmit={handleSubmit(goForward)}>
                 <PageHeading>Choose your Ability Scores</PageHeading>
                 <AbilityScoreContainer>
                     {data.results.map((score) => (

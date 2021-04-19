@@ -7,18 +7,17 @@ import ButtonGroup from "../../../ui/ButtonGroup";
 import Select from "../../../forms/Select";
 import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
-import { CharacterWizardAction } from "../../wizardReducer";
 
-export default function ClassStep({ defaultValue, dispatch }) {
+export default function ClassStep({ formState, goForward, goBack }) {
     const { data, isLoading, isError } = useQuery(["api", "classes"]);
     const methods = useForm({
         defaultValues: {
-            class: defaultValue.class || "",
-            hitDie: defaultValue.hitDie || "",
-            proficiencies: defaultValue.proficiencies || [],
-            proficiencyOptions: defaultValue.proficiencyOptions || [],
-            equipment: defaultValue.equipment || [],
-            savingThrows: defaultValue.savingThrows || []
+            class: formState.class || "",
+            hitDie: formState.hitDie || "",
+            proficiencies: formState.proficiencies || [],
+            proficiencyOptions: formState.proficiencyOptions || [],
+            equipment: formState.equipment || [],
+            savingThrows: formState.savingThrows || []
         }
     });
     const {
@@ -28,10 +27,6 @@ export default function ClassStep({ defaultValue, dispatch }) {
         formState: { errors }
     } = methods;
     const currentClass = watch("class");
-
-    function onSubmit(data) {
-        dispatch({ type: CharacterWizardAction.COMPLETE_CLASS_STEP, payload: data });
-    }
 
     if (isLoading) {
         return (
@@ -50,7 +45,7 @@ export default function ClassStep({ defaultValue, dispatch }) {
     return (
         <section>
             <FormProvider {...methods}>
-                <StepForm onSubmit={handleSubmit(onSubmit)}>
+                <StepForm onSubmit={handleSubmit(goForward)}>
                     <PageHeading>Choose your Class</PageHeading>
                     <Select
                         label={"Class"}
@@ -72,8 +67,7 @@ export default function ClassStep({ defaultValue, dispatch }) {
                         <ClassChoicesForm classIndex={currentClass} />
                     ) : null}
                     <ButtonGroup>
-                        {/* TODO: make this cancel the current character */}
-                        <Button type={"button"}>Cancel</Button>
+                        <Button type={"button"} onClick={goBack}>Back</Button>
                         <Button type={"submit"}>Next</Button>
                     </ButtonGroup>
                 </StepForm>
