@@ -16,7 +16,7 @@ const AbilityScoreContainer = styled.div`
 
     @media only screen and (min-width: ${({ theme }) =>
             theme.breakpoints.medium}) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 `;
 
