@@ -19,7 +19,8 @@ export default function RaceStep({ formState, goForward }) {
             age: formState.age,
             alignment: formState.alignment || "",
             languages: formState.languages || [],
-            languageOptions: formState.languageOptions || []
+            languageOptions: formState.languageOptions || [],
+            traits: formState.traits || []
         }
     });
     const {

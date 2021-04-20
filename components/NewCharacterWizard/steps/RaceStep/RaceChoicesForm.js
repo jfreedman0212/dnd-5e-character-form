@@ -9,6 +9,7 @@ import { useFormContext } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
 import Select from "../../../forms/Select";
+import InfoExpand from "../../../forms/InfoExpand";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -38,7 +39,13 @@ export default function RaceChoicesForm({ raceIndex }) {
     const { data, status } = useQuery({
         queryKey: ["api", "races", raceIndex],
         onSuccess: (successfulData) => {
-            const { speed, ability_bonuses, languages, size } = successfulData;
+            const {
+                speed,
+                ability_bonuses,
+                languages,
+                size,
+                traits
+            } = successfulData;
             reset({
                 race: raceIndex,
                 speed,
@@ -54,7 +61,8 @@ export default function RaceChoicesForm({ raceIndex }) {
                 ),
                 alignment: "",
                 languages: languages.map((language) => language.index),
-                languageOptions: []
+                languageOptions: [],
+                traits: traits.map((trait) => trait.index)
             });
         },
         // only refetch when raceIndex changes and NEVER at another time
@@ -123,7 +131,10 @@ export default function RaceChoicesForm({ raceIndex }) {
                     </option>
                     {alignments &&
                         alignments.results.map((alignment) => (
-                            <option value={alignment.index}>
+                            <option
+                                key={alignment.index}
+                                value={alignment.index}
+                            >
                                 {alignment.name}
                             </option>
                         ))}
@@ -186,6 +197,19 @@ export default function RaceChoicesForm({ raceIndex }) {
                     </FieldSet>
                 ) : null}
             </SubSection>
+            {data.traits.length > 0 ? (
+                <SubSection>
+                    <SubSectionHeading>Traits</SubSectionHeading>
+                    {data.traits.map((trait) => (
+                        <InfoExpand
+                            key={trait.index}
+                            itemName={trait.name}
+                            itemUrl={trait.url}
+                            {...register("traits")}
+                        />
+                    ))}
+                </SubSection>
+            ) : null}
         </>
     );
 }
