@@ -2,14 +2,12 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
 import Input from "../../../forms/Input";
-import ErrorMessage from "../../../forms/ErrorMessage";
-import OptionCheckboxField from "../../../forms/OptionCheckboxField";
-import FieldSet from "../../../forms/FieldSet";
 import { useFormContext } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
 import Select from "../../../forms/Select";
-import InfoExpand from "../../../forms/InfoExpand";
+import LanguagesSection from "./LanguagesSection";
+import TraitsSection from "./TraitsSection";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -23,10 +21,6 @@ const SubSection = styled.section`
     gap: 1rem;
     padding: 2rem;
     border: 2px solid ${(props) => props.theme.colors.dark};
-`;
-
-const HiddenFieldSet = styled(FieldSet)`
-    display: none;
 `;
 
 export default function RaceChoicesForm({ raceIndex }) {
@@ -158,56 +152,18 @@ export default function RaceChoicesForm({ raceIndex }) {
                 <span>{data.age}</span>
             </SubSection>
             <SubSection>
-                <SubSectionHeading>Languages</SubSectionHeading>
-                <HiddenFieldSet disabled>
-                    {data.languages.map((language) => (
-                        <OptionCheckboxField
-                            key={language.index}
-                            item={language}
-                            {...register("languages")}
-                        />
-                    ))}
-                </HiddenFieldSet>
-                <span>{data.language_desc}</span>
-                {data.language_options ? (
-                    <FieldSet>
-                        <legend>Choose {data.language_options.choose}</legend>
-                        {errors?.languageOptions?.message ? (
-                            <ErrorMessage>
-                                {errors.languageOptions.message}
-                            </ErrorMessage>
-                        ) : null}
-                        {data.language_options.from.map((language) => (
-                            <OptionCheckboxField
-                                key={language.index}
-                                item={language}
-                                {...register("languageOptions", {
-                                    validate: (value) => {
-                                        if (
-                                            value.length !==
-                                            data.language_options.choose
-                                        ) {
-                                            return `Must choose exactly ${data.language_options.choose}`;
-                                        }
-                                        return true;
-                                    }
-                                })}
-                            />
-                        ))}
-                    </FieldSet>
-                ) : null}
+                <LanguagesSection
+                    languages={data.languages}
+                    languageOptions={data.language_options}
+                    languageDescription={data.language_desc}
+                />
             </SubSection>
             {data.traits.length > 0 ? (
                 <SubSection>
-                    <SubSectionHeading>Traits</SubSectionHeading>
-                    {data.traits.map((trait) => (
-                        <InfoExpand
-                            key={trait.index}
-                            itemName={trait.name}
-                            itemUrl={trait.url}
-                            {...register("traits")}
-                        />
-                    ))}
+                    <TraitsSection
+                        traits={data.traits}
+                        traitOptions={data.trait_options}
+                    />
                 </SubSection>
             ) : null}
         </>

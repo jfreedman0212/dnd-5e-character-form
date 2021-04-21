@@ -8,6 +8,8 @@ import { useQuery } from "react-query";
 import styled from "styled-components";
 import Loading from "../utils/Loading";
 import ErrorMessage from "./ErrorMessage";
+import Checkbox from "./Checkbox";
+import Label from "./Label";
 
 const InfoExpandContainer = styled.div``;
 
@@ -55,9 +57,11 @@ function InfoExpandedArea({ name, url }) {
         );
     } else if (status === "error" || status === "idle") {
         return (
-            <ErrorMessage>
-                Error loading {name}, please try again later.
-            </ErrorMessage>
+            <InfoExpandedAreaContainer>
+                <ErrorMessage>
+                    Error loading {name}, please try again later.
+                </ErrorMessage>
+            </InfoExpandedAreaContainer>
         );
     }
 
@@ -70,34 +74,99 @@ function InfoExpandedArea({ name, url }) {
     );
 }
 
-function InfoExpand({ itemName, itemUrl, name, onBlur, onChange }, ref) {
-    const [opened, setOpened] = useState(false);
+export const InfoExpand = forwardRef(
+    ({ item, name, onBlur, onChange }, ref) => {
+        const [opened, setOpened] = useState(false);
 
-    function toggle() {
-        setOpened((x) => !x);
-    }
+        function toggle() {
+            setOpened((x) => !x);
+        }
 
-    return (
-        <InfoExpandContainer>
-            <HiddenInput
-                type={"hidden"}
-                name={name}
-                ref={ref}
-                onBlur={onBlur}
-                onChange={onChange}
-            />
-            <InfoExpandButton onClick={toggle} type={"button"}>
-                <span>{itemName}</span>
-                <FontAwesomeIcon
-                    icon={opened ? faChevronRight : faChevronDown}
-                    fixedWidth
+        return (
+            <InfoExpandContainer>
+                <HiddenInput
+                    type={"hidden"}
+                    name={name}
+                    ref={ref}
+                    onBlur={onBlur}
+                    onChange={onChange}
                 />
-            </InfoExpandButton>
-            {opened ? (
-                <InfoExpandedArea name={itemName} url={itemUrl.substring(1)} />
-            ) : null}
-        </InfoExpandContainer>
-    );
-}
+                <InfoExpandButton onClick={toggle} type={"button"}>
+                    <span>{item.name}</span>
+                    <FontAwesomeIcon
+                        icon={opened ? faChevronRight : faChevronDown}
+                        fixedWidth
+                    />
+                </InfoExpandButton>
+                {opened ? (
+                    <InfoExpandedArea
+                        name={item.name}
+                        url={item.url.substring(1)}
+                    />
+                ) : null}
+            </InfoExpandContainer>
+        );
+    }
+);
 
-export default forwardRef(InfoExpand);
+const InfoExpandButtonContainer = styled.div`
+    display: grid;
+    grid-template-columns: min-content 2fr min-content;
+    color: ${(props) => props.theme.colors.dark};
+`;
+
+const CheckboxContainer = styled.div`
+    border: 2px solid ${(props) => props.theme.colors.dark};
+    padding: 0.75rem;
+`;
+
+const LabelContainer = styled.div`
+    border: 2px solid ${(props) => props.theme.colors.dark};
+    border-left: unset;
+    border-right: unset;
+    padding: 0.75rem;
+`;
+
+export const InfoExpandWithCheckbox = forwardRef(
+    ({ name, onBlur, onChange, item }, ref) => {
+        const [opened, setOpened] = useState(false);
+
+        function toggle() {
+            setOpened((x) => !x);
+        }
+
+        return (
+            <InfoExpandContainer>
+                <InfoExpandButtonContainer>
+                    <CheckboxContainer>
+                        <Checkbox
+                            name={name}
+                            value={item.index}
+                            onBlur={onBlur}
+                            onChange={onChange}
+                            ref={ref}
+                        />
+                    </CheckboxContainer>
+                    <LabelContainer>
+                        <Label htmlFor={`${name}-${item.index}`}>
+                            {item.name}
+                        </Label>
+                    </LabelContainer>
+                    <InfoExpandButton onClick={toggle} type={"button"}>
+                        <FontAwesomeIcon
+                            icon={opened ? faChevronRight : faChevronDown}
+                            fixedWidth
+                        />
+                    </InfoExpandButton>
+                </InfoExpandButtonContainer>
+                {opened ? (
+                    <InfoExpandedArea
+                        key={item.index}
+                        name={item.name}
+                        url={item.url.substring(1)}
+                    />
+                ) : null}
+            </InfoExpandContainer>
+        );
+    }
+);

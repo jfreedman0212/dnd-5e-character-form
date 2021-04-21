@@ -20,7 +20,7 @@ const Checkbox = forwardRef(({ name, onBlur, onChange, value, label }, ref) => {
                 type={"checkbox"}
                 value={value}
             />
-            <Label htmlFor={`${name}-${value}`}>{label}</Label>
+            {label ? <Label htmlFor={`${name}-${value}`}>{label}</Label> : null}
         </Container>
     );
 });
