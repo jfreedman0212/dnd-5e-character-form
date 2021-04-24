@@ -8,6 +8,7 @@ import Loading from "../../../utils/Loading";
 import Input from "../../../forms/Input";
 import styled from "styled-components";
 import { CharacterWizardStep } from "../../enums";
+import Head from "next/head";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -58,6 +59,9 @@ export default function AbilityScoreStep({ formState, goForward, goBack }) {
 
     return (
         <section>
+            <Head>
+                <title>New Character | Ability Scores</title>
+            </Head>
             <StepForm onSubmit={handleSubmit(goForward)}>
                 <PageHeading>Choose your Ability Scores</PageHeading>
                 <AbilityScoreContainer>

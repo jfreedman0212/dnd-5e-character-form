@@ -8,6 +8,7 @@ import Loading from "../../../utils/Loading";
 import { CharacterWizardStep } from "../../enums";
 import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
+import Head from "next/head";
 
 export default function RaceStep({ formState, goForward }) {
     const { data, isLoading, isError } = useQuery(["api", "races"]);
@@ -49,6 +50,9 @@ export default function RaceStep({ formState, goForward }) {
 
     return (
         <section>
+            <Head>
+                <title>New Character | Race</title>
+            </Head>
             <FormProvider {...methods}>
                 <StepForm onSubmit={handleSubmit(goForward)}>
                     <PageHeading>Choose your Race</PageHeading>

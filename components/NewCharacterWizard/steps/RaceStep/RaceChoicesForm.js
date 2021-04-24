@@ -9,6 +9,7 @@ import Select from "../../../forms/Select";
 import LanguagesSection from "./LanguagesSection";
 import TraitsSection from "./TraitsSection";
 import ProficienciesSection from "../ProficienciesSection";
+import ProficienciesList from "../ProficienciesList";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -173,9 +174,9 @@ export default function RaceChoicesForm({ raceIndex }) {
             {data.starting_proficiencies &&
             data.starting_proficiencies.length > 0 ? (
                 <SubSection>
-                    <ProficienciesSection
+                    <SubSectionHeading>Proficiencies</SubSectionHeading>
+                    <ProficienciesList
                         proficiencies={data.starting_proficiencies}
-                        proficiencyChoices={data.starting_proficiency_choices}
                     />
                 </SubSection>
             ) : null}

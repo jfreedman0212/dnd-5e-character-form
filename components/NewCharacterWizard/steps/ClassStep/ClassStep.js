@@ -8,6 +8,7 @@ import Select from "../../../forms/Select";
 import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
 import { CharacterWizardStep } from "../../enums";
+import Head from "next/head";
 
 export default function ClassStep({ formState, goForward, goBack }) {
     const { data, isLoading, isError } = useQuery(["api", "classes"]);
@@ -46,6 +47,9 @@ export default function ClassStep({ formState, goForward, goBack }) {
 
     return (
         <section>
+            <Head>
+                <title>New Character | Class</title>
+            </Head>
             <FormProvider {...methods}>
                 <StepForm onSubmit={handleSubmit(goForward)}>
                     <PageHeading>Choose your Class</PageHeading>

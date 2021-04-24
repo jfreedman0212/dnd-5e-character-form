@@ -5,6 +5,7 @@ import AbilityScoreStep from "./steps/AbilityScoreStep/AbilityScoreStep";
 import Wizard from "../utils/Wizard";
 import { useQueryClient } from "react-query";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const steps = [
     {
@@ -30,5 +31,12 @@ export default function NewCharacterWizard() {
             queryClient.prefetchQuery(["api", "alignments"])
         ]);
     }, [queryClient]);
-    return <Wizard steps={steps} />;
+    return (
+        <>
+            <Head>
+                <title>New Character</title>
+            </Head>
+            <Wizard steps={steps} />
+        </>
+    );
 }

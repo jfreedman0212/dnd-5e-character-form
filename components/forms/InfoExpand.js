@@ -45,7 +45,7 @@ const InfoExpandedAreaContainer = styled.div`
     border-top: unset;
 `;
 
-function InfoExpandedArea({ name, url }) {
+function InfoExpandedArea({ name, url, children }) {
     const queryKey = url.split("/");
     const { data, status } = useQuery(queryKey);
 
@@ -70,12 +70,13 @@ function InfoExpandedArea({ name, url }) {
             {data.desc.map((desc, index) => (
                 <span key={index}>{desc}</span>
             ))}
+            {children}
         </InfoExpandedAreaContainer>
     );
 }
 
 export const InfoExpand = forwardRef(
-    ({ item, name, onBlur, onChange }, ref) => {
+    ({ item, name, onBlur, onChange, children }, ref) => {
         const [opened, setOpened] = useState(false);
 
         function toggle() {
@@ -102,7 +103,9 @@ export const InfoExpand = forwardRef(
                     <InfoExpandedArea
                         name={item.name}
                         url={item.url.substring(1)}
-                    />
+                    >
+                        {children}
+                    </InfoExpandedArea>
                 ) : null}
             </InfoExpandContainer>
         );
