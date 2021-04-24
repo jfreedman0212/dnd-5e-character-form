@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import Input from "../../../forms/Input";
 import styled from "styled-components";
+import { CharacterWizardStep } from "../../enums";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -29,12 +30,13 @@ export default function AbilityScoreStep({ formState, goForward, goBack }) {
         formState: { errors }
     } = useForm({
         defaultValues: {
-            cha: formState.cha || "",
-            con: formState.con || "",
-            dex: formState.dex || "",
-            int: formState.int || "",
-            str: formState.str || "",
-            wis: formState.wis || ""
+            cha: "",
+            con: "",
+            dex: "",
+            int: "",
+            str: "",
+            wis: "",
+            ...formState[CharacterWizardStep.ABILITY_SCORE]
         }
     });
 

@@ -7,17 +7,19 @@ import ButtonGroup from "../../../ui/ButtonGroup";
 import Select from "../../../forms/Select";
 import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
+import { CharacterWizardStep } from "../../enums";
 
 export default function ClassStep({ formState, goForward, goBack }) {
     const { data, isLoading, isError } = useQuery(["api", "classes"]);
     const methods = useForm({
         defaultValues: {
-            class: formState.class || "",
-            hitDie: formState.hitDie || "",
-            proficiencies: formState.proficiencies || [],
-            proficiencyOptions: formState.proficiencyOptions || [],
-            equipment: formState.equipment || [],
-            savingThrows: formState.savingThrows || []
+            class: "",
+            hitDie: "",
+            proficiencies: [],
+            proficiencyOptions: [],
+            equipment: [],
+            savingThrows: [],
+            ...formState[CharacterWizardStep.CLASS]
         }
     });
     const {

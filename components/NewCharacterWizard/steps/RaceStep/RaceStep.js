@@ -5,6 +5,7 @@ import Button from "../../../ui/Button";
 import ButtonGroup from "../../../ui/ButtonGroup";
 import PageHeading from "../../../ui/PageHeading";
 import Loading from "../../../utils/Loading";
+import { CharacterWizardStep } from "../../enums";
 import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
 
@@ -12,15 +13,16 @@ export default function RaceStep({ formState, goForward }) {
     const { data, isLoading, isError } = useQuery(["api", "races"]);
     const methods = useForm({
         defaultValues: {
-            race: formState.race || "",
-            speed: formState.speed,
-            size: formState.size || "",
-            abilityScoreBonus: formState.abilityScoreBonus || {},
-            age: formState.age,
-            alignment: formState.alignment || "",
-            languages: formState.languages || [],
-            languageOptions: formState.languageOptions || [],
-            traits: formState.traits || []
+            race: "",
+            size: "",
+            abilityScoreBonus: {},
+            alignment: "",
+            languages: [],
+            languageOptions: [],
+            traits: [],
+            proficiencies: [],
+            proficiencyChoices: [],
+            ...formState[CharacterWizardStep.RACE]
         }
     });
     const {
