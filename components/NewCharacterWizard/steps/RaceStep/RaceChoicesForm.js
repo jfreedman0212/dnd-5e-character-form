@@ -8,6 +8,7 @@ import styled from "styled-components";
 import Select from "../../../forms/Select";
 import LanguagesSection from "./LanguagesSection";
 import TraitsSection from "./TraitsSection";
+import ProficienciesSection from "../ProficienciesSection";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -38,7 +39,8 @@ export default function RaceChoicesForm({ raceIndex }) {
                 ability_bonuses,
                 languages,
                 size,
-                traits
+                traits,
+                starting_proficiencies
             } = successfulData;
             reset({
                 race: raceIndex,
@@ -56,7 +58,9 @@ export default function RaceChoicesForm({ raceIndex }) {
                 alignment: "",
                 languages: languages.map((language) => language.index),
                 languageOptions: [],
-                traits: traits.map((trait) => trait.index)
+                traits: traits.map((trait) => trait.index),
+                proficiencies: starting_proficiencies.map((x) => x.index),
+                proficiencyChoices: []
             });
         },
         // only refetch when raceIndex changes and NEVER at another time
@@ -163,6 +167,15 @@ export default function RaceChoicesForm({ raceIndex }) {
                     <TraitsSection
                         traits={data.traits}
                         traitOptions={data.trait_options}
+                    />
+                </SubSection>
+            ) : null}
+            {data.starting_proficiencies &&
+            data.starting_proficiencies.length > 0 ? (
+                <SubSection>
+                    <ProficienciesSection
+                        proficiencies={data.starting_proficiencies}
+                        proficiencyChoices={data.starting_proficiency_choices}
                     />
                 </SubSection>
             ) : null}

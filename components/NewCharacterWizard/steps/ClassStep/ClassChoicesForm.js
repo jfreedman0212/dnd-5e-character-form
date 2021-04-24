@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { useFormContext } from "react-hook-form";
 import Loading from "../../../utils/Loading";
 import FieldSet from "../../../forms/FieldSet";
-import ProficienciesSection from "./ProficienciesSection";
+import ProficienciesSection from "../ProficienciesSection";
 import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 import Input from "../../../forms/Input";
 import SectionHeading from "../../../ui/SectionHeading";
