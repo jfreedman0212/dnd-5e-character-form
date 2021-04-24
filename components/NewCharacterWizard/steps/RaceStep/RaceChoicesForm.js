@@ -8,7 +8,6 @@ import styled from "styled-components";
 import Select from "../../../forms/Select";
 import LanguagesSection from "./LanguagesSection";
 import TraitsSection from "./TraitsSection";
-import ProficienciesSection from "../ProficienciesSection";
 import ProficienciesList from "../ProficienciesList";
 
 const BonusContainer = styled.div`
