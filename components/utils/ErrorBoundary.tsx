@@ -1,12 +1,12 @@
 import { Component, ReactNode, ErrorInfo } from "react";
 
-interface ErrorBoundaryProps {
-    children: ReactNode;
-}
+type ErrorBoundaryProps = Readonly<{
+    children: ReactNode
+}>;
 
-interface ErrorBoundaryState {
-    error?: any;
-}
+type ErrorBoundaryState = Readonly<{
+    error?: any
+}>;
 
 export default class ErrorBoundary extends Component<
     ErrorBoundaryProps,
