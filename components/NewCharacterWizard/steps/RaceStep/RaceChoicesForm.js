@@ -150,7 +150,8 @@ export default function RaceChoicesForm({ raceIndex }) {
                         min: {
                             value: 0,
                             message: "Must be greater than 0"
-                        }
+                        },
+                        valueAsNumber: true
                     })}
                     errorMessage={errors?.age?.message}
                 />

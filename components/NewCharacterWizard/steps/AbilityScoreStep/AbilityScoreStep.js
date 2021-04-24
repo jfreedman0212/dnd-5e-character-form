@@ -80,7 +80,8 @@ export default function AbilityScoreStep({ formState, goForward, goBack }) {
                                 max: {
                                     value: 20,
                                     message: "Must be no greater than 20."
-                                }
+                                },
+                                valueAsNumber: true
                             })}
                         />
                     ))}
