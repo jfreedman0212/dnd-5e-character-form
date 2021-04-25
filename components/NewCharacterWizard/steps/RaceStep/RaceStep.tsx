@@ -9,9 +9,11 @@ import { CharacterWizardStep } from "../../enums";
 import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
 import Head from "next/head";
+import { WizardStepProps } from "../../../utils/Wizard/types";
+import { ResourceList } from "../../../../lib/dnd5e_api";
 
-export default function RaceStep({ formState, goForward }) {
-    const { data, isLoading, isError } = useQuery(["api", "races"]);
+export default function RaceStep({ formState, goForward }: WizardStepProps) {
+    const { data, isLoading, isError } = useQuery<ResourceList>(["api", "races"]);
     const methods = useForm({
         defaultValues: {
             race: "",

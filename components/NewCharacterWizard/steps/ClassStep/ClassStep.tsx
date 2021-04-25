@@ -9,9 +9,11 @@ import StepForm from "../StepForm";
 import PageHeading from "../../../ui/PageHeading";
 import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
+import { WizardStepProps } from "../../../utils/Wizard/types";
+import { ResourceList } from "../../../../lib/dnd5e_api";
 
-export default function ClassStep({ formState, goForward, goBack }) {
-    const { data, isLoading, isError } = useQuery(["api", "classes"]);
+export default function ClassStep({ formState, goForward, goBack }: WizardStepProps) {
+    const { data, isLoading, isError } = useQuery<ResourceList>(["api", "classes"]);
     const methods = useForm({
         defaultValues: {
             class: "",
