@@ -88,7 +88,7 @@ type InfoExpandProps = Readonly<{
     name: string;
     onBlur: ChangeHandler;
     onChange: ChangeHandler;
-    children: ReactNode;
+    children?: ReactNode;
 }>;
 
 export const InfoExpand = forwardRef(

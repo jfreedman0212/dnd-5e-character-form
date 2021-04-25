@@ -4,16 +4,23 @@ import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 import styled from "styled-components";
 import FieldSet from "../../../forms/FieldSet";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
+import { ApiReference, Choice } from "../../../../lib/dnd5e_api";
 
 const HiddenFieldSet = styled(FieldSet)`
     display: none;
 `;
 
+type LanguagesSectionProps = Readonly<{
+    languages: ApiReference[];
+    languageOptions?: Choice;
+    languageDescription: string;
+}>;
+
 export default function LanguagesSection({
     languages,
     languageOptions,
     languageDescription
-}) {
+}: LanguagesSectionProps) {
     const {
         register,
         formState: { errors }

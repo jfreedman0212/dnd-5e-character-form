@@ -1,10 +1,18 @@
 import { useFormContext } from "react-hook-form";
+import { ApiReference, Choice } from "../../../../lib/dnd5e_api";
 import { InfoExpand, InfoExpandWithCheckbox } from "../../../forms/InfoExpand";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
 
-export default function TraitsSection({ traits, traitOptions }) {
-    const { register } = useFormContext();
+type TraitsSectionProps = Readonly<{
+    traits: ApiReference[];
+    traitOptions?: Choice;
+}>;
 
+export default function TraitsSection({
+    traits,
+    traitOptions
+}: TraitsSectionProps) {
+    const { register } = useFormContext();
     return (
         <>
             <SubSectionHeading>Traits</SubSectionHeading>

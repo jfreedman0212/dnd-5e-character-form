@@ -31,10 +31,10 @@ export type Race = Readonly<{
     size_description: string;
     starting_proficiencies: ApiReference[];
     languages: ApiReference[];
-    // language_options?
+    language_options?: Choice;
     language_desc: string;
     traits: ApiReference[];
-    // trait_options?
+    trait_options?: Choice;
     subraces: ApiReference[];
     url: string;
 }>;
