@@ -1,7 +1,10 @@
 import { ComponentType } from "react";
 
+type FormState = any;
+type WizardSubmitPayload = any;
+
 export type WizardStepProps = Readonly<{
-    formState: any;
+    formState: FormState;
     goBack: () => unknown;
     goForward: (data: any) => unknown;
 }>;
@@ -21,11 +24,11 @@ export type WizardReducerAction =
       }>
     | Readonly<{
           type: "GO_FORWARD";
-          payload: any;
+          payload: WizardSubmitPayload;
       }>;
 
 export type WizardState = Readonly<{
-      wizardData: any;
-      currentStep: number;
-      steps: WizardStep[];
+    wizardData: WizardSubmitPayload;
+    currentStep: number;
+    steps: WizardStep[];
 }>;
