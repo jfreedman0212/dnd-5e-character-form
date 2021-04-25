@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { forwardRef, InputHTMLAttributes } from "react";
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
@@ -22,7 +22,7 @@ type InputProps = Readonly<{
 const Input = forwardRef(
     (
         { label, name, onChange, onBlur, errorMessage, ...rest }: InputProps,
-        ref
+        ref: ForwardedRef<HTMLInputElement>
     ) => {
         return (
             <FormGroup>

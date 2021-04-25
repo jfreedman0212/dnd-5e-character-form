@@ -6,8 +6,9 @@ import Wizard from "../utils/Wizard";
 import { useQueryClient } from "react-query";
 import { useEffect } from "react";
 import Head from "next/head";
+import { WizardStep } from "../utils/Wizard/types";
 
-const steps = [
+const steps: WizardStep[] = [
     {
         name: CharacterWizardStep.RACE,
         component: RaceStep
