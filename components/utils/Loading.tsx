@@ -9,7 +9,11 @@ const LoadingContainer = styled.div`
     font-size: 1.5rem;
 `;
 
-export default function Loading({ message }) {
+type LoadingProps = Readonly<{
+    message?: string;
+}>
+
+export default function Loading({ message }: LoadingProps) {
     return (
         <LoadingContainer>
             <FontAwesomeIcon icon={faSpinner} spin />

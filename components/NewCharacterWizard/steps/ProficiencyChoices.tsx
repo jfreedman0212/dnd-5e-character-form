@@ -2,8 +2,13 @@ import { useFormContext } from "react-hook-form";
 import FieldSet from "../../forms/FieldSet";
 import ErrorMessage from "../../forms/ErrorMessage";
 import OptionCheckboxField from "../../forms/OptionCheckboxField";
+import { Choice } from "../../../lib/dnd5e_api";
 
-export default function ProficiencyChoices({ proficiencyChoices }) {
+type ProficiencyChoicesProps = Readonly<{
+    proficiencyChoices: Choice[];
+}>;
+
+export default function ProficiencyChoices({ proficiencyChoices }: ProficiencyChoicesProps) {
     const {
         register,
         formState: { errors }

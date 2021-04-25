@@ -1,6 +1,9 @@
 import FieldSet from "../../../FieldSet";
 import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 
+// TODO: this file needs to be fixed anyways,
+//  so it will be skipped in the TS refactor
+
 export default function StartingEquipmentSection({
     startingEquipment,
     startingEquipmentOptions,

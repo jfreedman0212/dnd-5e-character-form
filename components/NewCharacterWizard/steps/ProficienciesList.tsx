@@ -1,9 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import styled from "styled-components";
-import Input from "../../forms/Input";
+import { ApiReference } from "../../../lib/dnd5e_api";
 
 // TODO: refactor into form components folder?
-const HiddenInput = styled(Input)`
+const HiddenInput = styled.input`
     display: none;
 `;
 
@@ -13,7 +13,13 @@ const UnorderedList = styled.ul`
     padding-left: 1rem;
 `;
 
-export default function ProficienciesList({ proficiencies }) {
+type ProficienciesListProps = Readonly<{
+    proficiencies: ApiReference[];
+}>;
+
+export default function ProficienciesList({
+    proficiencies
+}: ProficienciesListProps) {
     const { register } = useFormContext();
     return (
         <UnorderedList>

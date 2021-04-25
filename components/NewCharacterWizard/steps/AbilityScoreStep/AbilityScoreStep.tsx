@@ -9,6 +9,8 @@ import Input from "../../../forms/Input";
 import styled from "styled-components";
 import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
+import { WizardStepProps } from "../../../utils/Wizard/types";
+import { ResourceList } from "../../../../lib/dnd5e_api";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -22,8 +24,8 @@ const AbilityScoreContainer = styled.div`
     }
 `;
 
-export default function AbilityScoreStep({ formState, goForward, goBack }) {
-    const { data, status } = useQuery(["api", "ability-scores"]);
+export default function AbilityScoreStep({ formState, goForward, goBack }: WizardStepProps) {
+    const { data, status } = useQuery<ResourceList>(["api", "ability-scores"]);
 
     const {
         register,

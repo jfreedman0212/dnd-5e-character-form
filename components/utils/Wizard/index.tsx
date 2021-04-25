@@ -1,6 +1,7 @@
 import { useReducer } from "react";
+import { WizardProps, WizardReducerAction, WizardState } from "./types";
 
-function reducer(state, action) {
+function reducer(state: WizardState, action: WizardReducerAction): WizardState {
     switch (action.type) {
         case "GO_FORWARD":
             return {
@@ -25,14 +26,14 @@ function reducer(state, action) {
     }
 }
 
-export default function Wizard({ steps }) {
-    const [{ currentStep, wizardData }, dispatch] = useReducer(reducer, {
-        steps,
+export default function Wizard(props: WizardProps) {
+    const [{ currentStep, wizardData, steps }, dispatch] = useReducer(reducer, {
+        steps: props.steps,
         currentStep: 0,
         wizardData: {}
     });
 
-    function goForward(data) {
+    function goForward(data: any) {
         dispatch({ type: "GO_FORWARD", payload: data });
     }
 
