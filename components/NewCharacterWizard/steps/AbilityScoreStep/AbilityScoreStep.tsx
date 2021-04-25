@@ -24,9 +24,14 @@ const AbilityScoreContainer = styled.div`
     }
 `;
 
-export default function AbilityScoreStep({ formState, goForward, goBack }: WizardStepProps) {
+export default function AbilityScoreStep({
+    formState,
+    goForward,
+    goBack
+}: WizardStepProps) {
     const { data, status } = useQuery<ResourceList>(["api", "ability-scores"]);
-
+    const abilityScoreBonus =
+        formState[CharacterWizardStep.RACE].abilityScoreBonus;
     const {
         register,
         handleSubmit,
@@ -67,26 +72,34 @@ export default function AbilityScoreStep({ formState, goForward, goBack }: Wizar
             <StepForm onSubmit={handleSubmit(goForward)}>
                 <PageHeading>Choose your Ability Scores</PageHeading>
                 <AbilityScoreContainer>
-                    {data.results.map((score) => (
-                        <Input
-                            key={score.index}
-                            label={score.name}
-                            type={"number"}
-                            errorMessage={errors?.[score.index]?.message}
-                            {...register(score.index, {
-                                required: "This field is required.",
-                                min: {
-                                    value: 1,
-                                    message: "Must be at least 1."
-                                },
-                                max: {
-                                    value: 20,
-                                    message: "Must be no greater than 20."
-                                },
-                                valueAsNumber: true
-                            })}
-                        />
-                    ))}
+                    {data.results.map((score) => {
+                        let label = score.name;
+                        if (abilityScoreBonus[score.index]) {
+                            label = `${score.name} +${
+                                abilityScoreBonus[score.index]
+                            }`;
+                        }
+                        return (
+                            <Input
+                                key={score.index}
+                                label={label}
+                                type={"number"}
+                                errorMessage={errors?.[score.index]?.message}
+                                {...register(score.index, {
+                                    required: "This field is required.",
+                                    min: {
+                                        value: 1,
+                                        message: "Must be at least 1."
+                                    },
+                                    max: {
+                                        value: 20,
+                                        message: "Must be no greater than 20."
+                                    },
+                                    valueAsNumber: true
+                                })}
+                            />
+                        );
+                    })}
                 </AbilityScoreContainer>
                 <ButtonGroup>
                     <Button onClick={goBack} type={"button"}>
