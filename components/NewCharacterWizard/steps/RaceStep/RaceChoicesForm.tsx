@@ -25,7 +25,11 @@ const SubSection = styled.section`
     border: 2px solid ${(props) => props.theme.colors.dark};
 `;
 
-export default function RaceChoicesForm({ raceIndex }) {
+type RaceChoicesFormProps = Readonly<{
+    raceIndex: string;
+}>;
+
+export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
     const {
         register,
         formState: { errors },

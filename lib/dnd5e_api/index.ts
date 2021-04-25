@@ -39,6 +39,22 @@ export type Race = Readonly<{
     url: string;
 }>;
 
+export type Class = Readonly<{
+    index: string;
+    name: string;
+    hit_die: number;
+    proficiency_choices: Choice[];
+    proficiencies: ApiReference[];
+    saving_throws: ApiReference[];
+    // TODO: 
+    //      - starting_equipment
+    //      - class_levels
+    //      - subclasses
+    //      - spellcasting
+    //      - spells
+    url: string;
+}>;
+
 export type Trait = Readonly<{
     index: string;
     races: ApiReference[];

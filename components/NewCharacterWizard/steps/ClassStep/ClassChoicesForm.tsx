@@ -6,15 +6,22 @@ import ProficienciesSection from "../ProficienciesSection";
 import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 import Input from "../../../forms/Input";
 import SectionHeading from "../../../ui/SectionHeading";
+import { Class } from "../../../../lib/dnd5e_api";
 // import StartingEquipmentSection from "./StartingEquipmentSection";
 
 // TODO:
 //  1. make StartingEquipmentSection work properly (need to check all possible data types)
 //  2. style this form to not look ugly please
 
-export default function ClassChoicesForm({ classIndex }) {
+type ClassChoicesFormProps = Readonly<{
+    classIndex: string;
+}>;
+
+export default function ClassChoicesForm({
+    classIndex
+}: ClassChoicesFormProps) {
     const { register, reset } = useFormContext();
-    const { data, status } = useQuery({
+    const { data, status } = useQuery<Class>({
         queryKey: ["api", "classes", classIndex],
         onSuccess: (successfulData) => {
             const { hit_die, proficiencies, saving_throws } = successfulData;
