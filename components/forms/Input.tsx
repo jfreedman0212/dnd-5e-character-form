@@ -1,16 +1,29 @@
 import styled from "styled-components";
-import { forwardRef } from "react";
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
 import { inputCss } from "./inputCss";
+import { ChangeHandler } from "react-hook-form";
 
 const InputElement = styled.input`
     ${inputCss}
 `;
 
+type InputProps = Readonly<{
+    label: string;
+    name: string;
+    onChange: ChangeHandler;
+    onBlur: ChangeHandler;
+    errorMessage?: string;
+}> &
+    InputHTMLAttributes<unknown>;
+
 const Input = forwardRef(
-    ({ label, name, onChange, onBlur, errorMessage, ...rest }, ref) => {
+    (
+        { label, name, onChange, onBlur, errorMessage, ...rest }: InputProps,
+        ref: ForwardedRef<HTMLInputElement>
+    ) => {
         return (
             <FormGroup>
                 <Label htmlFor={name}>{label}</Label>

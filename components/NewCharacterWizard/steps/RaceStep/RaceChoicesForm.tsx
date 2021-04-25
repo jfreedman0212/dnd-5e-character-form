@@ -9,6 +9,7 @@ import Select from "../../../forms/Select";
 import LanguagesSection from "./LanguagesSection";
 import TraitsSection from "./TraitsSection";
 import ProficienciesList from "../ProficienciesList";
+import { Race, ResourceList } from "../../../../lib/dnd5e_api";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -24,14 +25,18 @@ const SubSection = styled.section`
     border: 2px solid ${(props) => props.theme.colors.dark};
 `;
 
-export default function RaceChoicesForm({ raceIndex }) {
+type RaceChoicesFormProps = Readonly<{
+    raceIndex: string;
+}>;
+
+export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
     const {
         register,
         formState: { errors },
         reset
     } = useFormContext();
 
-    const { data, status } = useQuery({
+    const { data, status } = useQuery<Race>({
         queryKey: ["api", "races", raceIndex],
         onSuccess: (successfulData) => {
             const {
@@ -69,10 +74,10 @@ export default function RaceChoicesForm({ raceIndex }) {
         refetchOnReconnect: false
     });
 
-    const { data: alignments, status: alignmentsStatus } = useQuery([
-        "api",
-        "alignments"
-    ]);
+    const {
+        data: alignments,
+        status: alignmentsStatus
+    } = useQuery<ResourceList>(["api", "alignments"]);
 
     if (alignmentsStatus === "error" || alignmentsStatus === "idle") {
         throw new Error(

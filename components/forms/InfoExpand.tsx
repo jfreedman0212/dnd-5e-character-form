@@ -3,13 +3,15 @@ import {
     faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { forwardRef, useState } from "react";
+import { ForwardedRef, forwardRef, ReactNode, useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import Loading from "../utils/Loading";
 import ErrorMessage from "./ErrorMessage";
 import Checkbox from "./Checkbox";
 import Label from "./Label";
+import { ChangeHandler } from "react-hook-form";
+import { ApiReference, Trait } from "../../lib/dnd5e_api";
 
 const InfoExpandContainer = styled.div``;
 
@@ -45,9 +47,15 @@ const InfoExpandedAreaContainer = styled.div`
     border-top: unset;
 `;
 
-function InfoExpandedArea({ name, url, children }) {
+type InfoExpandedAreaProps = Readonly<{
+    name: string;
+    url: string;
+    children?: ReactNode;
+}>;
+
+function InfoExpandedArea({ name, url, children }: InfoExpandedAreaProps) {
     const queryKey = url.split("/");
-    const { data, status } = useQuery(queryKey);
+    const { data, status } = useQuery<Trait>(queryKey);
 
     if (status === "loading") {
         return (
@@ -75,8 +83,19 @@ function InfoExpandedArea({ name, url, children }) {
     );
 }
 
+type InfoExpandProps = Readonly<{
+    item: ApiReference;
+    name: string;
+    onBlur: ChangeHandler;
+    onChange: ChangeHandler;
+    children?: ReactNode;
+}>;
+
 export const InfoExpand = forwardRef(
-    ({ item, name, onBlur, onChange, children }, ref) => {
+    (
+        { item, name, onBlur, onChange, children }: InfoExpandProps,
+        ref: ForwardedRef<HTMLInputElement>
+    ) => {
         const [opened, setOpened] = useState(false);
 
         function toggle() {
@@ -130,8 +149,18 @@ const LabelContainer = styled.div`
     padding: 0.75rem;
 `;
 
+type InfoExpandWithCheckboxProps = Readonly<{
+    name: string;
+    onBlur: ChangeHandler;
+    onChange: ChangeHandler;
+    item: ApiReference;
+}>;
+
 export const InfoExpandWithCheckbox = forwardRef(
-    ({ name, onBlur, onChange, item }, ref) => {
+    (
+        { name, onBlur, onChange, item }: InfoExpandWithCheckboxProps,
+        ref: ForwardedRef<HTMLInputElement>
+    ) => {
         const [opened, setOpened] = useState(false);
 
         function toggle() {
