@@ -11,6 +11,10 @@ import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
 import { ResourceList } from "../../../../lib/dnd5e_api";
+import { useState } from "react";
+import Anchor from "../../../ui/Anchor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -29,6 +33,7 @@ export default function AbilityScoreStep({
     goForward,
     goBack
 }: WizardStepProps) {
+    const [opened, setOpened] = useState(false);
     const { data, status } = useQuery<ResourceList>(["api", "ability-scores"]);
     const abilityScoreBonus =
         formState[CharacterWizardStep.RACE].abilityScoreBonus;
@@ -101,6 +106,19 @@ export default function AbilityScoreStep({
                         );
                     })}
                 </AbilityScoreContainer>
+                <Anchor onClick={() => setOpened((x) => !x)}>
+                    <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
+                    {opened ? "Hide Help" : "Show Help"}
+                </Anchor>
+                {opened ? (
+                    <div>
+                        If the Ability Score has a modifier next to it (ex: +2),
+                        then add that modifier to the value you were going to
+                        put there. So, if you want 14 for your STR score and +2
+                        is displayed, your STR score will be 16. These modifiers
+                        will come from the Race you chose.
+                    </div>
+                ) : null}
                 <ButtonGroup>
                     <Button onClick={goBack} type={"button"}>
                         Back
