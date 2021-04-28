@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
 import Input from "../../../forms/Input";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import React from "react";
 import styled from "styled-components";
 import Select from "../../../forms/Select";
@@ -10,6 +10,7 @@ import LanguagesSection from "./LanguagesSection";
 import TraitsSection from "./TraitsSection";
 import ProficienciesList from "../ProficienciesList";
 import { Race, ResourceList } from "../../../../lib/dnd5e_api";
+import RaceChildForm from "./RaceChildForm";
 
 const BonusContainer = styled.div`
     display: grid;
@@ -35,6 +36,8 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
         formState: { errors },
         reset
     } = useFormContext();
+
+    const watchSubRace = useWatch({ name: "subrace", defaultValue: "" });
 
     const { data, status } = useQuery<Race>({
         queryKey: ["api", "races", raceIndex],
@@ -74,17 +77,6 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
         refetchOnReconnect: false
     });
 
-    const {
-        data: alignments,
-        status: alignmentsStatus
-    } = useQuery<ResourceList>(["api", "alignments"]);
-
-    if (alignmentsStatus === "error" || alignmentsStatus === "idle") {
-        throw new Error(
-            "Could not fetch alignments. This is most likely an issue with the D&D API."
-        );
-    }
-
     if (status === "loading") {
         return <Loading />;
     } else if (status === "error") {
@@ -99,92 +91,37 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
 
     return (
         <>
-            <Input label={"Speed"} {...register("speed")} readOnly />
-            <SubSection>
-                <SubSectionHeading>Size</SubSectionHeading>
-                <Input label={"Size"} {...register("size")} readOnly />
-                <span>{data.size_description}</span>
-            </SubSection>
-            <SubSection>
-                <SubSectionHeading>Ability Score Bonuses</SubSectionHeading>
-                <BonusContainer>
-                    {data.ability_bonuses.map(({ ability_score }) => (
-                        <Input
-                            key={ability_score.index}
-                            label={ability_score.name}
-                            {...register(
-                                `abilityScoreBonus.${ability_score.index}`
-                            )}
-                            readOnly
-                        />
-                    ))}
-                </BonusContainer>
-            </SubSection>
-            <SubSection>
-                <SubSectionHeading>Alignment</SubSectionHeading>
+            {data.subraces.length > 0 ? (
                 <Select
-                    label={"Alignment"}
-                    {...register("alignment", {
-                        required: "This field is required"
+                    label={"Subrace"}
+                    {...register("subrace", {
+                        required: "This field is required."
                     })}
-                    errorMessage={errors?.alignment?.message}
+                    defaultValue={""}
+                    errorMessage={errors?.subrace?.message}
                 >
                     <option value={""} disabled>
-                        Choose an alignment
+                        Please select a subrace
                     </option>
-                    {alignments &&
-                        alignments.results.map((alignment) => (
-                            <option
-                                key={alignment.index}
-                                value={alignment.index}
-                            >
-                                {alignment.name}
-                            </option>
-                        ))}
+                    {data.subraces.map((subrace) => (
+                        <option key={subrace.index} value={subrace.index}>
+                            {subrace.name}
+                        </option>
+                    ))}
                 </Select>
-                <span>{data.alignment}</span>
-            </SubSection>
-            <SubSection>
-                <SubSectionHeading>Age</SubSectionHeading>
-                <Input
-                    label={"Age"}
-                    type={"number"}
-                    {...register("age", {
-                        required: "This field is required",
-                        min: {
-                            value: 0,
-                            message: "Must be greater than 0"
-                        },
-                        valueAsNumber: true
-                    })}
-                    errorMessage={errors?.age?.message}
-                />
-                <span>{data.age}</span>
-            </SubSection>
-            <SubSection>
-                <LanguagesSection
-                    languages={data.languages}
-                    languageOptions={data.language_options}
-                    languageDescription={data.language_desc}
-                />
-            </SubSection>
-            {data.traits.length > 0 ? (
-                <SubSection>
-                    <TraitsSection
-                        traits={data.traits}
-                        traitOptions={data.trait_options}
-                    />
-                </SubSection>
             ) : null}
-            {data.starting_proficiencies &&
-            data.starting_proficiencies.length > 0 ? (
-                <SubSection>
-                    <SubSectionHeading>Proficiencies</SubSectionHeading>
-                    <ProficienciesList
-                        proficiencies={data.starting_proficiencies}
-                    />
-                </SubSection>
-            ) : null}
+            <RaceChildForm 
+                abilityBonuses={data.ability_bonuses}
+                languages={data.languages}
+                languageOptions={data.language_options}
+                languageDescription={data.language_desc}
+                sizeDescription={data.size_description}
+                ageDescription={data.age}
+                traits={data.traits}
+                traitOptions={data.trait_options}
+                alignmentDescription={data.alignment}
+                startingProficiencies={data.starting_proficiencies}
+            />
         </>
     );
 }
