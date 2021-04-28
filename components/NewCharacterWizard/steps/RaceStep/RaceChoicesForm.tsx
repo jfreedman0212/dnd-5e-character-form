@@ -1,30 +1,10 @@
 import { useQuery } from "react-query";
 import Loading from "../../../utils/Loading";
-import SubSectionHeading from "../../../ui/SubSectionHeading";
-import Input from "../../../forms/Input";
 import { useFormContext, useWatch } from "react-hook-form";
 import React from "react";
-import styled from "styled-components";
 import Select from "../../../forms/Select";
-import LanguagesSection from "./LanguagesSection";
-import TraitsSection from "./TraitsSection";
-import ProficienciesList from "../ProficienciesList";
-import { Race, ResourceList } from "../../../../lib/dnd5e_api";
+import { Race } from "../../../../lib/dnd5e_api";
 import RaceChildForm from "./RaceChildForm";
-
-const BonusContainer = styled.div`
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(2, 1fr);
-`;
-
-const SubSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2rem;
-    border: 2px solid ${(props) => props.theme.colors.dark};
-`;
 
 type RaceChoicesFormProps = Readonly<{
     raceIndex: string;
@@ -37,7 +17,7 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
         reset
     } = useFormContext();
 
-    const watchSubRace = useWatch({ name: "subrace", defaultValue: "" });
+    const watchSubRace = useWatch({ name: "subrace" });
 
     const { data, status } = useQuery<Race>({
         queryKey: ["api", "races", raceIndex],
@@ -89,9 +69,14 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
         );
     }
 
+    const hasSubraces = data.subraces.length > 0;
+
+    console.log("hasSubraces", hasSubraces);
+    console.log("watchSubRace", watchSubRace);
+
     return (
         <>
-            {data.subraces.length > 0 ? (
+            {hasSubraces ? (
                 <Select
                     label={"Subrace"}
                     {...register("subrace", {
@@ -110,18 +95,20 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
                     ))}
                 </Select>
             ) : null}
-            <RaceChildForm 
-                abilityBonuses={data.ability_bonuses}
-                languages={data.languages}
-                languageOptions={data.language_options}
-                languageDescription={data.language_desc}
-                sizeDescription={data.size_description}
-                ageDescription={data.age}
-                traits={data.traits}
-                traitOptions={data.trait_options}
-                alignmentDescription={data.alignment}
-                startingProficiencies={data.starting_proficiencies}
-            />
+            {!hasSubraces || watchSubRace ? (
+                <RaceChildForm
+                    abilityBonuses={data.ability_bonuses}
+                    languages={data.languages}
+                    languageOptions={data.language_options}
+                    languageDescription={data.language_desc}
+                    sizeDescription={data.size_description}
+                    ageDescription={data.age}
+                    traits={data.traits}
+                    traitOptions={data.trait_options}
+                    alignmentDescription={data.alignment}
+                    startingProficiencies={data.starting_proficiencies}
+                />
+            ) : null}
         </>
     );
 }

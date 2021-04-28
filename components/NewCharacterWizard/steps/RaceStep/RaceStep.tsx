@@ -13,10 +13,14 @@ import { WizardStepProps } from "../../../utils/Wizard/types";
 import { ResourceList } from "../../../../lib/dnd5e_api";
 
 export default function RaceStep({ formState, goForward }: WizardStepProps) {
-    const { data, isLoading, isError } = useQuery<ResourceList>(["api", "races"]);
+    const { data, isLoading, isError } = useQuery<ResourceList>([
+        "api",
+        "races"
+    ]);
     const methods = useForm({
         defaultValues: {
             race: "",
+            subrace: "",
             size: "",
             abilityScoreBonus: {},
             alignment: "",
