@@ -10,6 +10,14 @@ export default class CharacterService implements ICharacterService {
     public constructor(prisma: Prisma) {
         this._prisma = prisma;
     }
+    
+    async getCharacterById(id: number): Promise<Character> {
+        return await this._prisma.character.findUnique({
+            where: {
+                id
+            }
+        });
+    }
 
     async createCharacter(character: Character): Promise<Character> {
         return await this._prisma.character.create({ data: character });
