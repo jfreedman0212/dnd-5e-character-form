@@ -1,6 +1,6 @@
 import { Container, ContainerModule } from "inversify";
 import TYPES from "./types";
-import CharacterService from "./CharacterService";
+import CharacterService from "./services/CharacterService";
 import { ICharacterService, Prisma } from "./interfaces";
 import { PrismaClient } from ".prisma/client";
 
@@ -12,7 +12,12 @@ const applicationDependencies = new ContainerModule((bind) => {
     bind<ICharacterService>(TYPES.CharacterService).to(CharacterService);
 });
 
+/**
+ * Global instance of the DI Container, contains all dependencies needed for the app.
+ * Should only be used by server-side code!
+ */
 const container = new Container();
+
 container.load(thirdPartyDependencies, applicationDependencies);
 
 export default container;

@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import TYPES from "./types";
-import { ICharacterService, Prisma } from "./interfaces";
+import TYPES from "../types";
+import { ICharacterService, Prisma } from "../interfaces";
 import { Character } from ".prisma/client";
 import { helpers } from "inversify-vanillajs-helpers";
 
