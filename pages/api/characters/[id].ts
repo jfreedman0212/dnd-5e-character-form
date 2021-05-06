@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 +id
             );
             if (deletedCharacter) {
-                res.status(204).end();
+                res.status(200).end();
             } else {
                 res.status(404).end(`No Character with ID ${id}`);
             }

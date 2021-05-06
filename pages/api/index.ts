@@ -5,9 +5,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
  */
 export default (req: NextApiRequest, res: NextApiResponse) => {
     const { method } = req;
-    if (method !== "GET") {
-        res.status(405).end(`Method ${method} Not Allowed`);
-    } else {
-        res.status(200).json({ name: "John Doe" });
+    switch (method) {
+        case "GET":
+            res.status(200).json(["/api/characters"]);
+            break;
+        default:
+            res.status(405).end(`Method ${method} Not Allowed`);
     }
 };
