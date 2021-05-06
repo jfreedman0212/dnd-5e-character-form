@@ -13,6 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         query: { id },
         body
     } = req;
+
     if (typeof id !== "string" || isNaN(parseInt(id))) {
         res.status(400).end("ID must be a valid integer");
         return;
@@ -21,10 +22,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     switch (method) {
         case "GET":
             const character = await characterService.getCharacterById(+id);
-            if (!character) {
-                res.status(404).end(`No Character with ID ${id}`);
-            } else {
+            if (character) {
                 res.status(200).json(character);
+            } else {
+                res.status(404).end(`No Character with ID ${id}`);
             }
             break;
         case "PUT":
@@ -32,10 +33,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 +id,
                 body
             );
-            if (!updatedCharacter) {
-                res.status(404).end(`No Character with ID ${id}`);
-            } else {
+            if (updatedCharacter) {
                 res.status(200).json(updatedCharacter);
+            } else {
+                res.status(404).end(`No Character with ID ${id}`);
             }
             break;
         case "DELETE":
