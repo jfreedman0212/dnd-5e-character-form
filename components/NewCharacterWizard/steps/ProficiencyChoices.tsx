@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import FieldSet from "../../forms/FieldSet";
 import ErrorMessage from "../../forms/ErrorMessage";
 import OptionCheckboxField from "../../forms/OptionCheckboxField";
-import { Choice } from "../../../lib/dnd5e_api";
+import { Choice } from "../../../lib/frontend/dnd5e_api/types";
 
 type ProficiencyChoicesProps = Readonly<{
     proficiencyChoices: Choice[];

@@ -6,7 +6,8 @@ import ProficienciesSection from "../ProficienciesSection";
 import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 import Input from "../../../forms/Input";
 import SectionHeading from "../../../ui/SectionHeading";
-import { Class } from "../../../../lib/dnd5e_api";
+import { Class } from "../../../../lib/frontend/dnd5e_api/types";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 // import StartingEquipmentSection from "./StartingEquipmentSection";
 
 // TODO:
@@ -22,7 +23,7 @@ export default function ClassChoicesForm({
 }: ClassChoicesFormProps) {
     const { register, reset } = useFormContext();
     const { data, status } = useQuery<Class>({
-        queryKey: ["api", "classes", classIndex],
+        queryKey: queryKeys.class(classIndex),
         onSuccess: (successfulData) => {
             const { hit_die, proficiencies, saving_throws } = successfulData;
             reset({

@@ -4,7 +4,7 @@ import OptionCheckboxField from "../../../forms/OptionCheckboxField";
 import styled from "styled-components";
 import FieldSet from "../../../forms/FieldSet";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
-import { ApiReference, Choice } from "../../../../lib/dnd5e_api";
+import { ApiReference, Choice } from "../../../../lib/frontend/dnd5e_api/types";
 
 const HiddenFieldSet = styled(FieldSet)`
     display: none;

@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { ApiReference, Choice } from "../../../../lib/dnd5e_api";
+import { ApiReference, Choice } from "../../../../lib/frontend/dnd5e_api/types";
 import { InfoExpand, InfoExpandWithCheckbox } from "../../../forms/InfoExpand";
 import SubSectionHeading from "../../../ui/SubSectionHeading";
 

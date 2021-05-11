@@ -3,8 +3,9 @@ import Loading from "../../../utils/Loading";
 import { useFormContext, useWatch } from "react-hook-form";
 import React from "react";
 import Select from "../../../forms/Select";
-import { Race } from "../../../../lib/dnd5e_api";
+import { Race } from "../../../../lib/frontend/dnd5e_api/types";
 import RaceChildForm from "./RaceChildForm";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 
 type RaceChoicesFormProps = Readonly<{
     raceIndex: string;
@@ -20,7 +21,7 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
     const watchSubRace = useWatch({ name: "subrace" });
 
     const { data, status } = useQuery<Race>({
-        queryKey: ["api", "races", raceIndex],
+        queryKey: queryKeys.race(raceIndex),
         onSuccess: (successfulData) => {
             const {
                 speed,

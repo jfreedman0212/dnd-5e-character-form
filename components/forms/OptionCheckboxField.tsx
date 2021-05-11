@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef } from "react";
 import { ChangeHandler } from "react-hook-form";
-import { ApiReference } from "../../lib/dnd5e_api";
+import { ApiReference } from "../../lib/frontend/dnd5e_api/types";
 import Checkbox from "./Checkbox";
 
 type OptionCheckboxFieldProps = Readonly<{

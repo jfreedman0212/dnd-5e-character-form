@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import styled from "styled-components";
-import { ApiReference } from "../../../lib/dnd5e_api";
+import { ApiReference } from "../../../lib/frontend/dnd5e_api/types";
 
 // TODO: refactor into form components folder?
 const HiddenInput = styled.input`

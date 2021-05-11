@@ -10,11 +10,12 @@ import styled from "styled-components";
 import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
-import { ResourceList } from "../../../../lib/dnd5e_api";
+import { ResourceList } from "../../../../lib/frontend/dnd5e_api/types";
 import { useState } from "react";
 import Anchor from "../../../ui/Anchor";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 
 const AbilityScoreContainer = styled.div`
     display: grid;
@@ -34,7 +35,7 @@ export default function AbilityScoreStep({
     goBack
 }: WizardStepProps) {
     const [opened, setOpened] = useState(false);
-    const { data, status } = useQuery<ResourceList>(["api", "ability-scores"]);
+    const { data, status } = useQuery<ResourceList>(queryKeys.abilityScores);
     const abilityScoreBonus =
         formState[CharacterWizardStep.RACE].abilityScoreBonus;
     const {

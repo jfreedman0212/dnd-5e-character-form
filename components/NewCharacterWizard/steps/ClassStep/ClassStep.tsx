@@ -10,10 +10,11 @@ import PageHeading from "../../../ui/PageHeading";
 import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
-import { ResourceList } from "../../../../lib/dnd5e_api";
+import { ResourceList } from "../../../../lib/frontend/dnd5e_api/types";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 
 export default function ClassStep({ formState, goForward, goBack }: WizardStepProps) {
-    const { data, isLoading, isError } = useQuery<ResourceList>(["api", "classes"]);
+    const { data, isLoading, isError } = useQuery<ResourceList>(queryKeys.classes);
     const methods = useForm({
         defaultValues: {
             class: "",
