@@ -1,4 +1,4 @@
-import { ApiReference, Choice } from "../../../lib/dnd5e_api";
+import { ApiReference, Choice } from "../../../lib/frontend/dnd5e_api/types";
 import SectionHeading from "../../ui/SectionHeading";
 import ProficienciesList from "./ProficienciesList";
 import ProficiencyChoices from "./ProficiencyChoices";

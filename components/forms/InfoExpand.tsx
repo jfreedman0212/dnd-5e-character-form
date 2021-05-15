@@ -11,7 +11,8 @@ import ErrorMessage from "./ErrorMessage";
 import Checkbox from "./Checkbox";
 import Label from "./Label";
 import { ChangeHandler } from "react-hook-form";
-import { ApiReference, Trait } from "../../lib/dnd5e_api";
+import { ApiReference, Trait } from "../../lib/frontend/dnd5e_api/types";
+import { queryKeys } from "../../lib/frontend/query_keys";
 
 const InfoExpandContainer = styled.div``;
 
@@ -55,7 +56,7 @@ type InfoExpandedAreaProps = Readonly<{
 
 function InfoExpandedArea({ name, url, children }: InfoExpandedAreaProps) {
     const queryKey = url.split("/");
-    const { data, status } = useQuery<Trait>(queryKey);
+    const { data, status } = useQuery<Trait>(queryKeys.trait(queryKey.reverse()[0]));
 
     if (status === "loading") {
         return (

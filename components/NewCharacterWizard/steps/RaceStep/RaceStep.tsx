@@ -10,13 +10,13 @@ import StepForm from "../StepForm";
 import RaceChoicesForm from "./RaceChoicesForm";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
-import { ResourceList } from "../../../../lib/dnd5e_api";
+import { ResourceList } from "../../../../lib/frontend/dnd5e_api/types";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 
 export default function RaceStep({ formState, goForward }: WizardStepProps) {
-    const { data, isLoading, isError } = useQuery<ResourceList>([
-        "api",
-        "races"
-    ]);
+    const { data, isLoading, isError } = useQuery<ResourceList>(
+        queryKeys.races
+    );
     const methods = useForm({
         defaultValues: {
             race: "",

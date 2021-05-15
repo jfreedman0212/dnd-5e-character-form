@@ -12,9 +12,10 @@ import {
     ApiReference,
     Choice,
     ResourceList
-} from "../../../../lib/dnd5e_api";
+} from "../../../../lib/frontend/dnd5e_api/types";
 import { useFormContext } from "react-hook-form";
 import Loading from "../../../utils/Loading";
+import { queryKeys } from "../../../../lib/frontend/query_keys";
 
 type RaceChildFormProps = Readonly<{
     abilityBonuses: AbilityBonus[];
@@ -63,7 +64,7 @@ export default function RaceChildForm({
     const {
         data: alignments,
         status: alignmentsStatus
-    } = useQuery<ResourceList>(["api", "alignments"]);
+    } = useQuery<ResourceList>(queryKeys.alignments);
 
     if (alignmentsStatus === "error" || alignmentsStatus === "idle") {
         throw new Error(
