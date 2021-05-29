@@ -1,5 +1,4 @@
-import { createGlobalStyle, ThemeProps } from "styled-components";
-import { AppTheme } from "./Theme/themes";
+import { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     html {
@@ -7,21 +6,20 @@ const GlobalStyle = createGlobalStyle`
     }
   
     body {
-        font-family: ${(props: ThemeProps<AppTheme>) =>
-            props.theme.fonts.join(",")};
-        font-size: ${(props: ThemeProps<AppTheme>) =>
-            props.theme.fontSizes.medium};
-        background-color: ${(props: ThemeProps<AppTheme>) =>
-            props.theme.colors.light};
-        color: ${(props: ThemeProps<AppTheme>) => props.theme.colors.dark};
+        font-family: ${(props) => props.theme.fonts.join(",")};
+        font-size: ${(props) => props.theme.fontSizes.medium};
+        background-color: ${(props) => props.theme.colors.light};
+        color: ${(props) => props.theme.colors.dark};
     }
 
-    @media only screen and (min-width: ${({ theme }: ThemeProps<AppTheme>) =>
-        theme.breakpoints.medium}) {
-        html {
-            font-size: 18px;
+    ${(props) => css`
+        @media only screen and (min-width: ${props.theme.breakpoints.medium}) {
+            html {
+                font-size: 18px;
+            }
         }
-  }
+    `}
+
 `;
 
 export default GlobalStyle;

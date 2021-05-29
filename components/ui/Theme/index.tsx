@@ -6,8 +6,8 @@ import {
     useContext,
     useState
 } from "react";
-import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, AppTheme } from "./themes";
+import { ThemeProvider, DefaultTheme } from "styled-components";
+import { lightTheme, darkTheme } from "./themes";
 
 type VisualModeDispatchType = Dispatch<SetStateAction<VisualMode>>;
 
@@ -22,7 +22,7 @@ type ThemeProps = Readonly<{
 
 export function Theme({ children }: ThemeProps) {
     const [visualMode, setVisualMode] = useState(VisualMode.DARK);
-    let currentTheme: AppTheme;
+    let currentTheme: DefaultTheme = null;
     switch (visualMode) {
         case VisualMode.LIGHT:
             currentTheme = lightTheme;

@@ -1,28 +1,6 @@
-export type AppTheme = Readonly<{
-    colors: {
-        primary: string;
-        secondary: string;
-        success: string;
-        danger: string;
-        warning: string;
-        info: string;
-        light: string;
-        dark: string
-    };
-    fontSizes: {
-        large: string;
-        medium: string;
-        small: string;
-    };
-    fonts: string[];
-    breakpoints: {
-        large: string;
-        medium: string;
-        small: string;
-    };
-}>;
+import { DefaultTheme } from "styled-components";
 
-export const lightTheme: AppTheme = {
+export const lightTheme: DefaultTheme = {
     colors: {
         primary: "#A63AE9",
         secondary: "#6c757d",
@@ -47,7 +25,7 @@ export const lightTheme: AppTheme = {
 };
 
 // dark theme is just light theme, but with "light" and "dark" colors switched
-export const darkTheme: AppTheme = {
+export const darkTheme: DefaultTheme = {
     ...lightTheme,
     colors: {
         ...lightTheme.colors,
