@@ -7,6 +7,14 @@ const characterService = container.get<ICharacterService>(
     TYPES.CharacterService
 );
 
+/**
+ * Handles various request methods to /characters/[id], which include:
+ * <ul>
+ *      <li>GET /characters/[id]: retrieves a character with the id specified</li>
+ *      <li>PUT /characters/[id]: updates a character with the id specified</li>
+ *      <li>DELETE /characters/[id]: deletes a character with the id specified</li>
+ * </ul>
+ */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const {
         method,

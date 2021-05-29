@@ -11,14 +11,15 @@ generator client {
 }
 
 model Character {
-  id    Int    @id @default(autoincrement())
-  name  String
-  race  String
-  class String
-  cha   Int
-  wis   Int
-  int   Int
-  str   Int
-  dex   Int
-  con   Int
+  id     Int    @id @default(autoincrement())
+  name   String
+  race   String
+  class  String
+  hitDie Int
+  cha    Int
+  wis    Int
+  int    Int
+  str    Int
+  dex    Int
+  con    Int
 }

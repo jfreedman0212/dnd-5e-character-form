@@ -6,7 +6,11 @@ import TYPES from "../../../lib/backend/types";
 const characterService = container.get<ICharacterService>(TYPES.CharacterService);
 
 /**
- * Handles GET /characters, which returns a list of characters
+ * Handles various request methods to /characters, which include:
+ * <ul>
+ *      <li>GET /characters: retrieves all characters</li>
+ *      <li>POST /characters: which creates a new character</li>
+ * </ul>
  */
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     switch (req.method) {
