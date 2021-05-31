@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 import styled from "styled-components";
+import Button from "../components/ui/Button";
+import ButtonGroup from "../components/ui/ButtonGroup";
 
 const PageContainer = styled.div`
     display: flex;
@@ -52,6 +54,18 @@ export default function Colors() {
                     <ColorView type={type} />
                 </Fragment>
             ))}
+            <ButtonGroup>
+                <Button color="primary">Primary</Button>
+                <Button color="success">Success</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button color="warning">Warning</Button>
+                <Button color="danger">Danger</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button color="info">Info</Button>
+                <Button color="neutral">Neutral</Button>
+            </ButtonGroup>
         </PageContainer>
     );
 }

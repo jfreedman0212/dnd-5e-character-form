@@ -13,6 +13,14 @@ declare module "styled-components" {
         [100]: string;
     }>;
 
+    type SizeOptions = Readonly<{
+        extraLarge: string;
+        large: string;
+        medium: string;
+        small: string;
+        extraSmall: string;
+    }>;
+
     export interface DefaultTheme {
         readonly colors: {
             readonly primary: string;
@@ -38,16 +46,8 @@ declare module "styled-components" {
             readonly [4]: string;
             readonly [5]: string;
         };
-        readonly fontSizes: {
-            readonly large: string;
-            readonly medium: string;
-            readonly small: string;
-        };
+        readonly fontSizes: SizeOptions;
         readonly fonts: string[];
-        readonly breakpoints: {
-            readonly large: string;
-            readonly medium: string;
-            readonly small: string;
-        };
+        readonly breakpoints: SizeOptions;
     }
 }

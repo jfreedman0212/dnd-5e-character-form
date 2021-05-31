@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
-const Button = styled.button`
-    border: 2px solid ${(props) => props.theme.colors.primary};
-    border-radius: 0;
+const Button = styled.button<{ color: string }>`
+    border: none;
+    border-radius: 10px;
     margin: 0;
-    color: ${(props) => props.theme.colors.primary};
-    background-color: transparent;
+    color: ${(props) => {
+        return props.theme.colors[props.color + "Shades"][900];
+    }};
+    background-color: ${(props) =>
+        props.theme.colors[props.color + "Shades"][500]};
     padding: 0.5rem 1rem;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: ${(props) => props.theme.fontSizes.medium};
+    cursor: pointer;
 
     &:hover {
-        background-color: ${(props) => props.theme.colors.primary};
-        color: ${(props) => props.theme.colors.light};
+        background-color: ${(props) =>
+            props.theme.colors[props.color + "Shades"][300]};
     }
 `;
 
