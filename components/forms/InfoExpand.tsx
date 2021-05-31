@@ -16,8 +16,8 @@ import { ApiReference, Trait } from "../../lib/dnd5e_api";
 const InfoExpandContainer = styled.div``;
 
 const InfoExpandButton = styled.button`
-    border: 2px solid ${(props) => props.theme.colors.dark};
-    color: ${(props) => props.theme.colors.dark};
+    border: 2px solid ${(props) => props.theme.colors.neutral[900]};
+    color: ${(props) => props.theme.colors.neutral[900]};
     width: 100%;
     border-radius: 0;
     margin: 0;
@@ -29,7 +29,7 @@ const InfoExpandButton = styled.button`
     font-size: ${(props) => props.theme.fontSizes.medium};
 
     &:focus {
-        border: 2px solid ${(props) => props.theme.colors.primary};
+        border: 2px solid ${(props) => props.theme.colors.primary[500]};
         outline: none;
     }
 `;
@@ -43,7 +43,7 @@ const InfoExpandedAreaContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    border: 2px solid ${(props) => props.theme.colors.dark};
+    border: 2px solid ${(props) => props.theme.colors.neutral[900]};
     border-top: unset;
 `;
 
@@ -134,16 +134,16 @@ export const InfoExpand = forwardRef(
 const InfoExpandButtonContainer = styled.div`
     display: grid;
     grid-template-columns: min-content 2fr min-content;
-    color: ${(props) => props.theme.colors.dark};
+    color: ${(props) => props.theme.colors.neutral[900]};
 `;
 
 const CheckboxContainer = styled.div`
-    border: 2px solid ${(props) => props.theme.colors.dark};
+    border: 2px solid ${(props) => props.theme.colors.neutral[900]};
     padding: 0.75rem;
 `;
 
 const LabelContainer = styled.div`
-    border: 2px solid ${(props) => props.theme.colors.dark};
+    border: 2px solid ${(props) => props.theme.colors.neutral[900]};
     border-left: unset;
     border-right: unset;
     padding: 0.75rem;

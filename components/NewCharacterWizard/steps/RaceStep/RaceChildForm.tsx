@@ -40,7 +40,7 @@ const SubSection = styled.section`
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
-    border: 2px solid ${(props) => props.theme.colors.dark};
+    border: 2px solid ${(props) => props.theme.colors.neutral[900]};
 `;
 
 export default function RaceChildForm({

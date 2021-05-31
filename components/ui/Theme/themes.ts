@@ -2,16 +2,7 @@ import { DefaultTheme } from "styled-components";
 
 export const lightTheme: DefaultTheme = {
     colors: {
-        primary: "#A63AE9",
-        secondary: "#6c757d",
-        success: "#28a745",
-        danger: "#dc3545",
-        warning: "#ffc107",
-        info: "#17a2b8",
-        light: "#F8F9FA",
-        dark: "#21252A",
-
-        primaryShades: {
+        primary: {
             [900]: "#140121",
             [800]: "#220238",
             [700]: "#3c0460",
@@ -22,7 +13,7 @@ export const lightTheme: DefaultTheme = {
             [200]: "#ca7cf9",
             [100]: "#ddabfc"
         },
-        successShades: {
+        success: {
             [900]: "#032b0d",
             [800]: "#054214",
             [700]: "#08561a",
@@ -33,7 +24,7 @@ export const lightTheme: DefaultTheme = {
             [200]: "#65f787",
             [100]: "#90f9a9"
         },
-        dangerShades: {
+        danger: {
             [900]: "#210004",
             [800]: "#420108",
             [700]: "#5e010c",
@@ -44,7 +35,7 @@ export const lightTheme: DefaultTheme = {
             [200]: "#f9818d",
             [100]: "#f99da6"
         },
-        warningShades: {
+        warning: {
             [900]: "#302400",
             [800]: "#846405",
             [700]: "#b58907",
@@ -55,7 +46,7 @@ export const lightTheme: DefaultTheme = {
             [200]: "#f7d56f",
             [100]: "#fce399"
         },
-        infoShades: {
+        info: {
             [900]: "#012a30",
             [800]: "#0c4c56",
             [700]: "#116e7c",
@@ -66,7 +57,7 @@ export const lightTheme: DefaultTheme = {
             [200]: "#aae6ef",
             [100]: "#ccf3f9"
         },
-        neutralShades: {
+        neutral: {
             [900]: "#21252A",
             [800]: "#343A40",
             [700]: "#495057",

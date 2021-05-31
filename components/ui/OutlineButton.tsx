@@ -3,12 +3,12 @@ import styled from "styled-components";
 const OutlineButton = styled.button<{ palette?: string }>`
     border: 1px solid
         ${(props) => {
-            return props.theme.colors.neutralShades[500];
+            return props.theme.colors.neutral[500];
         }};
     border-radius: 10px;
     margin: 0;
     color: ${(props) => {
-        return props.theme.colors.neutralShades[900];
+        return props.theme.colors.neutral[900];
     }};
     background-color: transparent;
     padding: 0.5rem 1rem;
@@ -18,12 +18,12 @@ const OutlineButton = styled.button<{ palette?: string }>`
 
     &:hover {
         background-color: ${(props) =>
-            props.theme.colors[props.palette + "Shades"][300]};
+            props.theme.colors[props.palette][300]};
         color: ${(props) => {
-            return props.theme.colors[props.palette + "Shades"][900];
+            return props.theme.colors[props.palette][900];
         }};
         border: 1px solid
-            ${(props) => props.theme.colors[props.palette + "Shades"][300]};
+            ${(props) => props.theme.colors[props.palette][300]};
     }
 `;
 

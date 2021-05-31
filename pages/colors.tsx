@@ -38,12 +38,12 @@ function ColorView({ type }) {
 }
 
 const colorTypes = [
-    "primaryShades",
-    "successShades",
-    "dangerShades",
-    "warningShades",
-    "infoShades",
-    "neutralShades"
+    "primary",
+    "success",
+    "danger",
+    "warning",
+    "info",
+    "neutral"
 ];
 
 export default function Colors() {

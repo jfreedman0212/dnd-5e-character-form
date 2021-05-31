@@ -23,21 +23,12 @@ declare module "styled-components" {
 
     export interface DefaultTheme {
         readonly colors: {
-            readonly primary: string;
-            readonly secondary: string;
-            readonly success: string;
-            readonly danger: string;
-            readonly warning: string;
-            readonly info: string;
-            readonly light: string;
-            readonly dark: string;
-
-            readonly primaryShades: ShadeOptions;
-            readonly successShades: ShadeOptions;
-            readonly dangerShades: ShadeOptions;
-            readonly warningShades: ShadeOptions;
-            readonly infoShades: ShadeOptions;
-            readonly neutralShades: ShadeOptions;
+            readonly primary: ShadeOptions;
+            readonly success: ShadeOptions;
+            readonly danger: ShadeOptions;
+            readonly warning: ShadeOptions;
+            readonly info: ShadeOptions;
+            readonly neutral: ShadeOptions;
         };
         readonly spacing: {
             readonly [1]: string;
