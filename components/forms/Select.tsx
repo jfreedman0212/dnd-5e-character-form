@@ -12,16 +12,7 @@ import { inputCss } from "./inputCss";
 import { ChangeHandler } from "react-hook-form";
 
 const SelectElement = styled.select`
-    ${inputCss};
-
-    & option {
-        background: ${(props) => props.theme.colors.dark};
-        color: ${(props) => props.theme.colors.light};
-    }
-
-    & option:disabled {
-        color: ${(props) => props.theme.colors.secondary};
-    }
+    ${inputCss}
 `;
 
 type SelectProps = Readonly<{

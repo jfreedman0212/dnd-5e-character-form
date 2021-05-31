@@ -11,9 +11,17 @@ import { CharacterWizardStep } from "../../enums";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
 import { ResourceList } from "../../../../lib/dnd5e_api";
+import OutlineButton from "../../../ui/OutlineButton";
 
-export default function ClassStep({ formState, goForward, goBack }: WizardStepProps) {
-    const { data, isLoading, isError } = useQuery<ResourceList>(["api", "classes"]);
+export default function ClassStep({
+    formState,
+    goForward,
+    goBack
+}: WizardStepProps) {
+    const { data, isLoading, isError } = useQuery<ResourceList>([
+        "api",
+        "classes"
+    ]);
     const methods = useForm({
         defaultValues: {
             class: "",
@@ -75,7 +83,9 @@ export default function ClassStep({ formState, goForward, goBack }: WizardStepPr
                         <ClassChoicesForm classIndex={currentClass} />
                     ) : null}
                     <ButtonGroup>
-                        <Button type={"button"} onClick={goBack}>Back</Button>
+                        <OutlineButton type={"button"} onClick={goBack}>
+                            Back
+                        </OutlineButton>
                         <Button type={"submit"}>Next</Button>
                     </ButtonGroup>
                 </StepForm>

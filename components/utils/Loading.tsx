@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoadingContainer = styled.div`
     display: flex;
-    gap: 1.5rem;
+    gap: ${(props) => props.theme.spacing[3]};
     align-items: center;
-    font-size: 1.5rem;
+    font-size: ${(props) => props.theme.fontSizes.large};
 `;
 
 type LoadingProps = Readonly<{
     message?: string;
-}>
+}>;
 
 export default function Loading({ message }: LoadingProps) {
     return (

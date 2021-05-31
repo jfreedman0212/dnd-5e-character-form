@@ -8,7 +8,9 @@ type ProficiencyChoicesProps = Readonly<{
     proficiencyChoices: Choice[];
 }>;
 
-export default function ProficiencyChoices({ proficiencyChoices }: ProficiencyChoicesProps) {
+export default function ProficiencyChoices({
+    proficiencyChoices
+}: ProficiencyChoicesProps) {
     const {
         register,
         formState: { errors }

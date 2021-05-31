@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import Button from "../components/ui/Button";
 import ButtonGroup from "../components/ui/ButtonGroup";
+import OutlineButton from "../components/ui/OutlineButton";
 
 const PageContainer = styled.div`
     display: flex;
@@ -54,17 +55,31 @@ export default function Colors() {
                     <ColorView type={type} />
                 </Fragment>
             ))}
+            <h1>Regular Buttons</h1>
             <ButtonGroup>
-                <Button color="primary">Primary</Button>
-                <Button color="success">Success</Button>
+                <Button palette="primary">Primary</Button>
+                <Button palette="success">Success</Button>
             </ButtonGroup>
             <ButtonGroup>
-                <Button color="warning">Warning</Button>
-                <Button color="danger">Danger</Button>
+                <Button palette="warning">Warning</Button>
+                <Button palette="danger">Danger</Button>
             </ButtonGroup>
             <ButtonGroup>
-                <Button color="info">Info</Button>
-                <Button color="neutral">Neutral</Button>
+                <Button palette="info">Info</Button>
+                <Button palette="neutral">Neutral</Button>
+            </ButtonGroup>
+            <h1>Outline Buttons</h1>
+            <ButtonGroup>
+                <OutlineButton palette="primary">Primary Outline</OutlineButton>
+                <OutlineButton palette="success">Success Outline</OutlineButton>
+            </ButtonGroup>
+            <ButtonGroup>
+                <OutlineButton palette="warning">Warning Outline</OutlineButton>
+                <OutlineButton palette="danger">Danger Outline</OutlineButton>
+            </ButtonGroup>
+            <ButtonGroup>
+                <OutlineButton palette="info">Info Outline</OutlineButton>
+                <OutlineButton palette="neutral">Neutral Outline</OutlineButton>
             </ButtonGroup>
         </PageContainer>
     );

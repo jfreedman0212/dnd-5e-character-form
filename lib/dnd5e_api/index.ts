@@ -46,7 +46,7 @@ export type Class = Readonly<{
     proficiency_choices: Choice[];
     proficiencies: ApiReference[];
     saving_throws: ApiReference[];
-    // TODO: 
+    // TODO:
     //      - starting_equipment
     //      - class_levels
     //      - subclasses

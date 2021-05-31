@@ -8,8 +8,8 @@ export const lightTheme: DefaultTheme = {
         danger: "#dc3545",
         warning: "#ffc107",
         info: "#17a2b8",
-        light: "#f8f9fa",
-        dark: "#343a40",
+        light: "#F8F9FA",
+        dark: "#21252A",
 
         primaryShades: {
             [900]: "#140121",
@@ -67,15 +67,15 @@ export const lightTheme: DefaultTheme = {
             [100]: "#ccf3f9"
         },
         neutralShades: {
-            [900]: "#343a40",
-            [800]: "#495056",
-            [700]: "#636a70",
-            [600]: "#787d82",
-            [500]: "#929599",
-            [400]: "#afb2b5",
-            [300]: "#cccdce",
-            [200]: "#e0e3e5",
-            [100]: "#f8f9fa"
+            [900]: "#21252A",
+            [800]: "#343A40",
+            [700]: "#495057",
+            [600]: "#868E96",
+            [500]: "#ADB5BD",
+            [400]: "#CFD4DA",
+            [300]: "#E9ECEE",
+            [200]: "#F1F3F5",
+            [100]: "#F8F9FA"
         }
     },
     spacing: {
@@ -104,11 +104,5 @@ export const lightTheme: DefaultTheme = {
 
 // dark theme is just light theme, but with "light" and "dark" colors switched
 export const darkTheme: DefaultTheme = {
-    ...lightTheme,
-    colors: {
-        ...lightTheme.colors,
-        primary: "#C88CE3",
-        light: lightTheme.colors.dark,
-        dark: lightTheme.colors.light
-    }
+    ...lightTheme
 };
