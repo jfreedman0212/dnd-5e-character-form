@@ -11,6 +11,8 @@ import RaceChoicesForm from "./RaceChoicesForm";
 import Head from "next/head";
 import { WizardStepProps } from "../../../utils/Wizard/types";
 import { ResourceList } from "../../../../lib/dnd5e_api";
+import Checkbox from "../../../forms/Checkbox";
+import FieldSet from "../../../forms/FieldSet";
 
 export default function RaceStep({ formState, goForward }: WizardStepProps) {
     const { data, isLoading, isError } = useQuery<ResourceList>([
@@ -62,7 +64,7 @@ export default function RaceStep({ formState, goForward }: WizardStepProps) {
             <FormProvider {...methods}>
                 <StepForm onSubmit={handleSubmit(goForward)}>
                     <PageHeading>Choose your Race</PageHeading>
-                    <Select
+                    {/* <Select
                         {...register("race", {
                             required: "This field is required"
                         })}
@@ -77,7 +79,21 @@ export default function RaceStep({ formState, goForward }: WizardStepProps) {
                                 {race.name}
                             </option>
                         ))}
-                    </Select>
+                    </Select> */}
+                    <FieldSet>
+                        {/* <legend>Choose your Race</legend> */}
+                        {data.results.map((race) => (
+                            <Checkbox
+                                key={race.index}
+                                type="radio"
+                                value={race.index}
+                                label={race.name}
+                                {...register("race", {
+                                    required: "This field is required"
+                                })}
+                            />
+                        ))}
+                    </FieldSet>
                     {currentRace && currentRace !== "" ? (
                         <RaceChoicesForm raceIndex={currentRace} />
                     ) : null}

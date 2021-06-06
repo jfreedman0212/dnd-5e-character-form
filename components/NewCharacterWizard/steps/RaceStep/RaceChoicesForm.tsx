@@ -71,9 +71,6 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
 
     const hasSubraces = data.subraces.length > 0;
 
-    console.log("hasSubraces", hasSubraces);
-    console.log("watchSubRace", watchSubRace);
-
     return (
         <>
             {hasSubraces ? (
@@ -85,9 +82,7 @@ export default function RaceChoicesForm({ raceIndex }: RaceChoicesFormProps) {
                     defaultValue={""}
                     errorMessage={errors?.subrace?.message}
                 >
-                    <option value={""} disabled>
-                        Please select a subrace
-                    </option>
+                    <option value={""} disabled />
                     {data.subraces.map((subrace) => (
                         <option key={subrace.index} value={subrace.index}>
                             {subrace.name}

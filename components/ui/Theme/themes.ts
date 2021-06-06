@@ -77,8 +77,8 @@ export const lightTheme: DefaultTheme = {
         [5]: "4rem"
     },
     fontSizes: {
-        extraLarge: "3rem",
-        large: "1.5rem",
+        extraLarge: "3.25rem",
+        large: "1.75rem",
         medium: "1rem",
         small: "0.9rem",
         extraSmall: "0.75rem"

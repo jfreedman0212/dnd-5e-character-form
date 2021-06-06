@@ -1,5 +1,6 @@
 import PageHeading from "../../../ui/PageHeading";
 import Button from "../../../ui/Button";
+import OutlineButton from "../../../ui/OutlineButton";
 import ButtonGroup from "../../../ui/ButtonGroup";
 import StepForm from "../StepForm";
 import { useForm } from "react-hook-form";
@@ -120,9 +121,9 @@ export default function AbilityScoreStep({
                     </div>
                 ) : null}
                 <ButtonGroup>
-                    <Button onClick={goBack} type={"button"}>
+                    <OutlineButton onClick={goBack} type={"button"}>
                         Back
-                    </Button>
+                    </OutlineButton>
                     <Button type={"submit"}>Next</Button>
                 </ButtonGroup>
             </StepForm>

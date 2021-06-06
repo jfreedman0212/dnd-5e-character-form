@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import {
-    ForwardedRef,
-    forwardRef,
-    ReactNode,
-    SelectHTMLAttributes
-} from "react";
+import { ComponentProps, ForwardedRef, forwardRef, ReactNode } from "react";
 import Label from "./Label";
 import ErrorMessage from "./ErrorMessage";
 import FormGroup from "./FormGroup";
 import { inputCss } from "./inputCss";
 import { ChangeHandler } from "react-hook-form";
+import InputDescription from "./InputDescription";
 
 const SelectElement = styled.select`
     ${inputCss}
@@ -21,9 +17,10 @@ type SelectProps = Readonly<{
     onChange: ChangeHandler;
     onBlur: ChangeHandler;
     errorMessage?: string;
+    description?: string;
     children: ReactNode;
 }> &
-    SelectHTMLAttributes<unknown>;
+    ComponentProps<typeof SelectElement>;
 
 function SelectComponent(
     {
@@ -32,6 +29,7 @@ function SelectComponent(
         onChange,
         onBlur,
         errorMessage,
+        description,
         children,
         ...rest
     }: SelectProps,
@@ -46,15 +44,23 @@ function SelectComponent(
                 onChange={onChange}
                 onBlur={onBlur}
                 ref={ref}
+                aria-describedby={`${name}Description`}
                 {...rest}
             >
                 {children}
             </SelectElement>
-            {errorMessage ? <ErrorMessage>{errorMessage}</ErrorMessage> : null}
+            {description ? (
+                <InputDescription id={`${name}Description`}>
+                    {description}
+                </InputDescription>
+            ) : null}
+            {errorMessage ? (
+                <ErrorMessage role="status" aria-live="polite">
+                    {errorMessage}
+                </ErrorMessage>
+            ) : null}
         </FormGroup>
     );
 }
 
-const Select = forwardRef(SelectComponent);
-
-export default Select;
+export default forwardRef(SelectComponent);

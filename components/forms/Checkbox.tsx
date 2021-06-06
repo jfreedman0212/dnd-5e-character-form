@@ -5,8 +5,12 @@ import Label from "./Label";
 
 const Container = styled.div`
     display: flex;
-    gap: 0.25rem;
-    align-items: center;
+    gap: ${(props) => props.theme.spacing[1]};
+    align-items: stretch;
+`;
+
+const ButtonInput = styled.input`
+    margin: 0;
 `;
 
 type CheckboxProps = Readonly<{
@@ -25,7 +29,7 @@ const Checkbox = forwardRef(
     ) => {
         return (
             <Container>
-                <input
+                <ButtonInput
                     id={`${name}-${value}`}
                     onChange={onChange}
                     onBlur={onBlur}
